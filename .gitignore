@@ -295,12 +295,10 @@ __pycache__/
 
 # CargoMint Specific
 test-visuals/
-test-data/
+# test-data/ is allowed for templates
 *.pdf
 *.docx
-*.xlsx
-*.csv
-*.xls
+# *.xlsx and *.csv are allowed if they are templates/samples
 * (1).html
 backend*.log
 tmp-api*.log

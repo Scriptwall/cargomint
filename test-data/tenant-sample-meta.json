@@ -1,0 +1,23 @@
+[
+    {
+        "TenantId":  2,
+        "TenantName":  "Starship NG",
+        "Identifier":  "starship-ng",
+        "HubName":  "Lagos Main Hub",
+        "ServiceCentreName":  "Ikeja Service Centre"
+    },
+    {
+        "TenantId":  4,
+        "TenantName":  "Tenant 6163",
+        "Identifier":  "tenant-6163",
+        "HubName":  "Default Main Hub",
+        "ServiceCentreName":  "Default Service Centre"
+    },
+    {
+        "TenantId":  5,
+        "TenantName":  "SwiftLane Dispatch",
+        "Identifier":  "swiftlane-ng",
+        "HubName":  "Default Main Hub",
+        "ServiceCentreName":  "Default Service Centre"
+    }
+]
