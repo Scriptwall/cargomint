@@ -308,6 +308,13 @@ web.*.log
 dotnet-build.log
 restore.diag.log
 
+# Internal Guidance
+AGENTS.md
+PHASE1_PROGRESS.md
+ARCHITECTURE_AND_TECHNICAL_SPEC.md
+DEMO_ACCOUNTS.md
+cargomint-final-prd.extracted.txt
+
 # Database and Data
 *.sqlite
 *.sqlite3
