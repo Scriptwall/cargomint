@@ -14,6 +14,9 @@ export default function OpsDashboard() {
   const [shipmentsList, setShipmentsList] = useState<any[]>([]);
   const [manifestsBoard, setManifestsBoard] = useState<any>({ pending: [], inTransit: [], delivered: [] });
   const [retailCustomers, setRetailCustomers] = useState<any[]>([]);
+  const [ledgerData, setLedgerData] = useState<any[]>([]);
+  const [invoicesList, setInvoicesList] = useState<any[]>([]);
+  const [fleetList, setFleetList] = useState<any[]>([]);
   const [viewingHub, setViewingHub] = useState<any>(null);
   const [senderType, setSenderType] = useState<'individual' | 'merchant'>('individual');
 
@@ -23,6 +26,9 @@ export default function OpsDashboard() {
   const [receiverSearchResults, setReceiverSearchResults] = useState<any[]>([]);
   const [pricingQuote, setPricingQuote] = useState<any>(null);
   const [waybillPreview, setWaybillPreview] = useState<any>(null);
+  const [statusModalOpen, setStatusModalOpen] = useState(false);
+  const [selectedWaybill, setSelectedWaybill] = useState('');
+  const [targetStatus, setTargetStatus] = useState('');
 
   // Sorting & Manifest State
   const GROUP_COLORS = [
@@ -40,26 +46,11 @@ export default function OpsDashboard() {
     'BLK': { bg: 'rgba(255,176,32,.12)', c: '#FFB020' },
   };
 
-  const [sortPool, setSortPool] = useState<any[]>([
-    { id: 'SL-00847', dest: 'Abuja', route: 'LOS→ABJ', wt: '2.5kg', type: 'STD', name: 'Amina Bello', amt: '₦3,175' },
-    { id: 'SL-00848', dest: 'Abuja', route: 'LOS→ABJ', wt: '1.8kg', type: 'EXP', name: 'Chidi Nwosu', amt: '₦4,200' },
-    { id: 'SL-00849', dest: 'Abuja', route: 'LOS→ABJ', wt: '4.0kg', type: 'STD', name: 'Grace Eze', amt: '₦2,600' },
-    { id: 'SL-00850', dest: 'Abuja', route: 'LOS→ABJ', wt: '0.9kg', type: 'FRG', name: 'Musa Kano', amt: '₦3,800' },
-    { id: 'SL-00851', dest: 'Kano', route: 'LOS→KAN', wt: '3.2kg', type: 'STD', name: 'Fatima Kabiru', amt: '₦2,900' },
-    { id: 'SL-00852', dest: 'Kano', route: 'LOS→KAN', wt: '5.1kg', type: 'BLK', name: 'Ibrahim Musa', amt: '₦5,400' },
-  ]);
+  const [sortPool, setSortPool] = useState<any[]>([]);
 
-  const [sortGroups, setSortGroups] = useState<any[]>([
-    { id: 'g1', label: 'Lagos → Abuja', route: 'LOS→ABJ', dest: 'Abuja', color: 0, shipments: [], bags: [], collapsed: false },
-    { id: 'g2', label: 'Lagos → Kano', route: 'LOS→KAN', dest: 'Kano', color: 1, shipments: [], bags: [], collapsed: false },
-    { id: 'g3', label: 'Lagos → Port Harcourt', route: 'LOS→PHC', dest: 'Port Harcourt', color: 2, shipments: [], bags: [], collapsed: false },
-    { id: 'g4', label: 'Lagos → Ibadan', route: 'LOS→IBD', dest: 'Ibadan', color: 3, shipments: [], bags: [], collapsed: false },
-  ]);
+  const [sortGroups, setSortGroups] = useState<any[]>([]);
 
-  const [builderManifests, setBuilderManifests] = useState<any[]>([
-    { id: 'MAN-0091', label: 'Manifest 001', groups: [], vehicle: '', captain: '', status: 'open' },
-    { id: 'MAN-0092', label: 'Manifest 002', groups: [], vehicle: '', captain: '', status: 'open' },
-  ]);
+  const [builderManifests, setBuilderManifests] = useState<any[]>([]);
   const [activeBuilderManifest, setActiveBuilderManifest] = useState(0);
 
   const [dragShipId, setDragShipId] = useState<string | null>(null);
@@ -250,7 +241,8 @@ export default function OpsDashboard() {
     isSameDay: false,
     length: 0,
     width: 0,
-    height: 0
+    height: 0,
+    waybill: ''
   });
 
   const [showValidation, setShowValidation] = useState(false);
@@ -379,6 +371,8 @@ export default function OpsDashboard() {
       else if (packageTab === 'manifest') fetchManifests();
     }
     else if (currentPage === 'customers') fetchCustomers();
+    else if (currentPage === 'ledger') { fetchLedger(); fetchInvoices(); }
+    else if (currentPage === 'fleet') fetchFleet();
   }, [currentPage, packageTab]);
 
   const fetchStations = async () => {
@@ -496,6 +490,51 @@ export default function OpsDashboard() {
     }
   };
 
+  const fetchLedger = async () => {
+    setIsLoading(true);
+    try {
+      const token = getAuthToken();
+      const response = await fetch(`${API_BASE}/Accounting/ledger`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) setLedgerData(await response.json());
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchInvoices = async () => {
+    setIsLoading(true);
+    try {
+      const token = getAuthToken();
+      const response = await fetch(`${API_BASE}/Accounting/invoices`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) setInvoicesList(await response.json());
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchFleet = async () => {
+    setIsLoading(true);
+    try {
+      const token = getAuthToken();
+      const response = await fetch(`${API_BASE}/Logistics/fleet`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) setFleetList(await response.json());
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
 
   const handleDispatchManifest = async (manifestId: string) => {
     try {
@@ -583,34 +622,23 @@ export default function OpsDashboard() {
   };
 
   const handleEditShipment = (shipment: any) => {
-    showToast(`Edit modal for ${shipment.waybill} coming soon`);
-  };
-
-  const handleUpdateShipmentStatus = async (waybill: string) => {
-    const status = prompt('Enter new status (0=Pending, 1=Processing, 2=InTransit, 3=Delivered):');
-    if (!status) return;
-    
-    const statusCode = parseInt(status) || 1;
-
-    try {
-      const response = await fetch(`${API_BASE}/Shipments/${waybill}/status`, {
-        method: 'PUT',
-        headers: { 
-          'Authorization': `Bearer ${getAuthToken()}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ waybill, status: statusCode })
-      });
-      if (response.ok) {
-        showToast(`Status updated for ${waybill}`);
-        fetchShipments();
-        fetchDashboardData();
-      } else {
-        showToast(`Failed to update status`);
-      }
-    } catch (err) {
-      console.error(err);
-    }
+    setShipmentForm({
+      ...shipmentForm,
+      senderName: shipment.senderName || '',
+      senderPhone: shipment.senderPhone || '',
+      pickupAddress: shipment.senderAddress || '',
+      receiverName: shipment.receiverName || '',
+      receiverPhone: shipment.receiverPhone || '',
+      receiverAddress: shipment.receiverAddress || '',
+      weight: shipment.weight || 1,
+      quantity: shipment.quantity || 1,
+      itemDescription: shipment.description || '',
+      departureServiceCentreId: shipment.departureServiceCentreId,
+      destinationServiceCentreId: shipment.destinationServiceCentreId,
+      waybill: shipment.waybill // Track if we are editing
+    });
+    setOpenModal('shipment');
+    setActiveTab(0);
   };
 
   const handleCreateShipment = async () => {
@@ -652,8 +680,11 @@ export default function OpsDashboard() {
         height: Number(shipmentForm.height || 0)
       };
 
-      const response = await fetch(`${API_BASE}/Shipments`, {
-        method: 'POST',
+      const isUpdate = !!shipmentForm.waybill;
+      const url = isUpdate ? `${API_BASE}/Shipments/${shipmentForm.waybill}` : `${API_BASE}/Shipments`;
+
+      const response = await fetch(url, {
+        method: isUpdate ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -663,14 +694,22 @@ export default function OpsDashboard() {
 
       if (!response.ok) {
         const errText = await response.text();
-        let errMsg = 'Failed to create shipment';
+        let errMsg = isUpdate ? 'Failed to update shipment' : 'Failed to create shipment';
         try {
           const errObj = JSON.parse(errText);
           errMsg = errObj.detail || errObj.message || errText;
         } catch {
-          errMsg = errText || 'Failed to create shipment';
+          errMsg = errText || errMsg;
         }
         throw new Error(errMsg);
+      }
+
+      if (isUpdate) {
+        showToast(`Shipment ${shipmentForm.waybill} updated successfully!`);
+        closeModal();
+        fetchShipments();
+        fetchDashboardData();
+        return;
       }
       const data = await response.json();
       // Handle both PascalCase (old API) and camelCase (new API with JsonOptions)
@@ -871,6 +910,33 @@ export default function OpsDashboard() {
     }
   };
 
+  const handleUpdateShipmentStatus = (waybill: string) => {
+    setSelectedWaybill(waybill);
+    setStatusModalOpen(true);
+  };
+
+  const confirmUpdateStatus = async () => {
+    if (!selectedWaybill || !targetStatus) return;
+    setIsSubmitting(true);
+    try {
+      const token = getAuthToken();
+      const response = await fetch(`${API_BASE}/Shipments/${selectedWaybill}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ status: targetStatus })
+      });
+      if (!response.ok) throw new Error('Update failed');
+      showToast(`Waybill ${selectedWaybill} updated to ${targetStatus}`);
+      setStatusModalOpen(false);
+      fetchShipments();
+      fetchDashboardData();
+    } catch (err) {
+      showToast('Status update failed');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handleCreateHub = async () => {
     if (!hubForm.name || !hubForm.state) {
       showToast('Hub name and state are required');
@@ -1009,23 +1075,24 @@ export default function OpsDashboard() {
         <div className="card card-p">
           <div className="card-ttl">Active routes (load factor)</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
-            {[
-              ['Lagos → Abuja',88],['Lagos → Port Harcourt',72],['Lagos → Kano',55],['Abuja → Kaduna',40],['Lagos → Ibadan',62]
-            ].map(([r,v], i) => (
+            {(dashboardData?.activeRoutes || []).map((r: any, i: number) => (
               <div key={i}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '3px' }}><span>{r}</span><span className="mono">{v}%</span></div>
-                <div className="prog-track"><div className="prog-fill" style={{ width: `${v}%`, background: (v as number) > 80 ? 'var(--red)' : (v as number) > 60 ? 'var(--amber)' : 'var(--accent)' }}></div></div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '3px' }}><span>{r.name}</span><span className="mono">{r.loadFactor}%</span></div>
+                <div className="prog-track"><div className="prog-fill" style={{ width: `${r.loadFactor}%`, background: (r.loadFactor as number) > 80 ? 'var(--red)' : (r.loadFactor as number) > 60 ? 'var(--amber)' : 'var(--accent)' }}></div></div>
               </div>
             ))}
+            {(!dashboardData?.activeRoutes || dashboardData.activeRoutes.length === 0) && (
+              <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-tertiary)', fontSize: '11px' }}>No active routes detected</div>
+            )}
           </div>
         </div>
         <div className="card card-p">
           <div className="card-ttl">Fleet status summary</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '12px' }}>
-            <div className="m-card"><div className="m-lbl">On route</div><div className="m-val" style={{ fontSize: '18px' }}>8</div></div>
-            <div className="m-card"><div className="m-lbl">Available</div><div className="m-val" style={{ fontSize: '18px' }}>4</div></div>
-            <div className="m-card"><div className="m-lbl">Maintenance</div><div className="m-val" style={{ fontSize: '18px' }}>2</div></div>
-            <div className="m-card"><div className="m-lbl">Total fleet</div><div className="m-val" style={{ fontSize: '18px' }}>14</div></div>
+            <div className="m-card"><div className="m-lbl">On route</div><div className="m-val" style={{ fontSize: '18px' }}>{dashboardData?.fleet?.onRoute || 0}</div></div>
+            <div className="m-card"><div className="m-lbl">Available</div><div className="m-val" style={{ fontSize: '18px' }}>{dashboardData?.fleet?.available || 0}</div></div>
+            <div className="m-card"><div className="m-lbl">Maintenance</div><div className="m-val" style={{ fontSize: '18px' }}>{dashboardData?.fleet?.maintenance || 0}</div></div>
+            <div className="m-card"><div className="m-lbl">Total fleet</div><div className="m-val" style={{ fontSize: '18px' }}>{dashboardData?.fleet?.total || 0}</div></div>
           </div>
           <button className="btn" style={{ width: '100%', justifyContent: 'center' }} onClick={() => setCurrentPage('fleet')}>View fleet →</button>
         </div>
@@ -1036,10 +1103,10 @@ export default function OpsDashboard() {
   const renderDesk = () => (
     <>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '10px', marginBottom: '18px' }}>
-        <div className="m-card"><div className="m-lbl">Created today</div><div className="m-val">148</div></div>
-        <div className="m-card"><div className="m-lbl">Pending pickup</div><div className="m-val">34</div></div>
-        <div className="m-card"><div className="m-lbl">Override used</div><div className="m-val">7</div><div className="m-sub dn">Review needed</div></div>
-        <div className="m-card"><div className="m-lbl">Today's desk revenue</div><div className="m-val">₦1.2M</div></div>
+        <div className="m-card"><div className="m-lbl">Created today</div><div className="m-val">{dashboardData?.todayShipments || 0}</div></div>
+        <div className="m-card"><div className="m-lbl">In Processing</div><div className="m-val">{dashboardData?.pipeline?.processing || 0}</div></div>
+        <div className="m-card"><div className="m-lbl">At Risk (SLA)</div><div className="m-val">{dashboardData?.slaAtRiskCount || 0}</div><div className="m-sub dn">Urgent attention</div></div>
+        <div className="m-card"><div className="m-lbl">Today's revenue</div><div className="m-val">₦{dashboardData?.todayRevenue?.toLocaleString() || 0}</div></div>
       </div>
       <div className="sec">
         <div className="sec-hd">
@@ -1623,23 +1690,13 @@ export default function OpsDashboard() {
   };
 
   const renderFleet = () => {
-    const vehicles = [
-      {plate:'LAS-441-KJ',type:'Sprinter Van',cap:'800kg',status:'On Route',trip:'MAN-0085',fuel:'72%',driver:'Emeka Okafor'},
-      {plate:'LAS-882-XZ',type:'Box Truck',cap:'2,000kg',status:'On Route',trip:'MAN-0086',fuel:'55%',driver:'Bashir Musa'},
-      {plate:'ABJ-220-MN',type:'Pickup Truck',cap:'500kg',status:'On Route',trip:'MAN-0087',fuel:'88%',driver:'Tunde Fashola'},
-      {plate:'LAS-103-QP',type:'Sprinter Van',cap:'800kg',status:'On Route',trip:'MAN-0088',fuel:'40%',driver:'Yemi Alade'},
-      {plate:'LAS-557-BD',type:'Motorcycle',cap:'30kg',status:'Available',trip:'—',fuel:'90%',driver:'Unassigned'},
-      {plate:'LAS-219-WT',type:'Sprinter Van',cap:'800kg',status:'Available',trip:'—',fuel:'95%',driver:'Unassigned'},
-      {plate:'ABJ-441-RR',type:'Box Truck',cap:'2,000kg',status:'Maintenance',trip:'—',fuel:'—',driver:'In workshop'},
-      {plate:'LAS-774-KX',type:'Pickup Truck',cap:'500kg',status:'Available',trip:'—',fuel:'82%',driver:'Unassigned'},
-    ];
     return (
       <>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '10px', marginBottom: '18px' }}>
-          <div className="m-card"><div className="m-lbl">Total vehicles</div><div className="m-val">14</div></div>
-          <div className="m-card"><div className="m-lbl">On route</div><div className="m-val">8</div><div className="m-sub" style={{ color: 'var(--text-info)' }}>Active trips</div></div>
-          <div className="m-card"><div className="m-lbl">Available</div><div className="m-val">4</div><div className="m-sub up">Ready to assign</div></div>
-          <div className="m-card"><div className="m-lbl">Maintenance</div><div className="m-val">2</div><div className="m-sub dn">Action needed</div></div>
+          <div className="m-card"><div className="m-lbl">Total vehicles</div><div className="m-val">{dashboardData?.fleet?.total || 0}</div></div>
+          <div className="m-card"><div className="m-lbl">On route</div><div className="m-val">{dashboardData?.fleet?.onRoute || 0}</div><div className="m-sub" style={{ color: 'var(--text-info)' }}>Active trips</div></div>
+          <div className="m-card"><div className="m-lbl">Available</div><div className="m-val">{dashboardData?.fleet?.available || 0}</div><div className="m-sub up">Ready to assign</div></div>
+          <div className="m-card"><div className="m-lbl">Maintenance</div><div className="m-val">{dashboardData?.fleet?.maintenance || 0}</div><div className="m-sub dn">Action needed</div></div>
         </div>
         <div className="sec">
           <div className="sec-hd">
@@ -1647,27 +1704,24 @@ export default function OpsDashboard() {
             <button className="btn primary sm" onClick={() => setOpenModal('vehicle')}>+ Register vehicle</button>
           </div>
           <div className="fleet-grid">
-            {(dashboardData?.fleet || vehicles).map((v: any, i: number) => (
+            {fleetList.map((v: any, i: number) => (
               <div key={i} className="fleet-card">
-                <div className="fleet-plate">{v.registrationNumber || v.plate}</div>
-                <div className="fleet-type">{(v.make && v.model) ? `${v.make} ${v.model}` : v.type || v.fleetType} · {v.capacity || v.cap}</div>
+                <div className="fleet-plate">{v.plate}</div>
+                <div className="fleet-type">{v.type} · {v.cap}</div>
                 <div style={{ marginBottom: '6px' }}>
-                  {v.status === 'On Route' ? <span className="badge badge-blue">On Route</span> : (v.status === 'Available' || v.isActive) ? <span className="badge badge-green">Available</span> : <span className="badge badge-amber">Maintenance</span>}
+                  {v.status === 'On Route' ? <span className="badge badge-blue">On Route</span> : v.status === 'Available' ? <span className="badge badge-green">Available</span> : <span className="badge badge-amber">Maintenance</span>}
                 </div>
-                <div className="fleet-stat-row"><span>Captain</span><span style={{ fontWeight: 500 }}>{v.captainName || v.driver || 'Unassigned'}</span></div>
-                <div className="fleet-stat-row"><span>Description</span><span style={{ fontSize: '10.5px' }}>{v.description || '—'}</span></div>
-                {v.fuel && v.fuel !== '—' && (
-                  <div style={{ marginTop: '6px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', marginBottom: '3px' }}><span style={{ color: 'var(--text-tertiary)' }}>Fuel</span><span className="mono">{v.fuel}</span></div>
-                    <div className="prog-track"><div className="prog-fill" style={{ width: v.fuel, background: parseInt(v.fuel) < 40 ? 'var(--red)' : parseInt(v.fuel) < 60 ? 'var(--amber)' : 'var(--green)' }}></div></div>
-                  </div>
-                )}
+                <div className="fleet-stat-row"><span>Captain</span><span style={{ fontWeight: 500 }}>{v.driver}</span></div>
+                <div className="fleet-stat-row"><span>Active Trip</span><span style={{ fontSize: '10.5px' }}>{v.trip}</span></div>
                 <div className="fleet-actions">
-                  <button className="btn sm" style={{ flex: 1, justifyContent: 'center' }} onClick={() => showToast(`Viewing ${v.registrationNumber || v.plate}`)}>Details</button>
-                  <button className="ibtn" onClick={() => handleEditVehicle(v)}><svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.1 2.9a1 1 0 011.4 0l.6.6a1 1 0 010 1.4L5.7 12.3l-2.2.5.5-2.2L11.1 2.9z"/></svg></button>
+                  <button className="btn sm" style={{ flex: 1, justifyContent: 'center' }} onClick={() => showToast(`Viewing ${v.plate}`)}>Details</button>
+                  <button className="ibtn" onClick={() => { setVehicleForm({ id: v.id, registrationNumber: v.plate, type: v.type, make: '', model: '', capacity: parseInt(v.cap), description: '', captainId: '' }); setOpenModal('vehicle'); }}><svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.1 2.9a1 1 0 011.4 0l.6.6a1 1 0 010 1.4L5.7 12.3l-2.2.5.5-2.2L11.1 2.9z"/></svg></button>
                 </div>
               </div>
             ))}
+            {fleetList.length === 0 && (
+              <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-tertiary)', gridColumn: '1 / -1' }}>No vehicles registered yet</div>
+            )}
           </div>
         </div>
 
@@ -1681,22 +1735,19 @@ export default function OpsDashboard() {
               <table>
                 <thead><tr><th>Captain Name</th><th>ID / Phone</th><th>Status</th><th>Vehicle</th><th>Active Trip</th><th></th></tr></thead>
                 <tbody>
-                  {[
-                    ['Emeka Okafor','CAP-4012 / 0801...','On Route','LAS-441-KJ','MAN-0085'],
-                    ['Bashir Musa','CAP-4088 / 0803...','On Route','LAS-882-XZ','MAN-0086'],
-                    ['Tunde Fashola','CAP-3921 / 0810...','On Route','ABJ-220-MN','MAN-0087'],
-                    ['Yemi Alade','CAP-4105 / 0706...','On Route','LAS-103-QP','MAN-0088'],
-                    ['Dave R.','CAP-4012 / 0909...','Online','Unassigned','—'],
-                  ].map(([name, phone, status, veh, trip], i) => (
+                  {(dashboardData?.eligibleCaptains || []).map((c: any, i: number) => (
                     <tr key={i}>
-                      <td style={{ fontWeight: 500, fontSize: '12px' }}>{name}</td>
-                      <td className="mono" style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{phone}</td>
-                      <td>{status === 'Online' ? <span className="badge badge-green">Online</span> : <span className="badge badge-blue">On Route</span>}</td>
-                      <td><span className="badge badge-gray">{veh}</span></td>
-                      <td className="mono">{trip}</td>
-                      <td><button className="ibtn" onClick={() => showToast(`Viewing ${name}`)}><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3C4.5 3 1.5 8 1.5 8S4.5 13 8 13s6.5-5 6.5-5S11.5 3 8 3zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></button></td>
+                      <td style={{ fontWeight: 500, fontSize: '12px' }}>{c.name}</td>
+                      <td className="mono" style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>ID-00{c.id}</td>
+                      <td><span className="badge badge-green">Available</span></td>
+                      <td className="badge-gray">Unassigned</td>
+                      <td className="mono">—</td>
+                      <td><button className="ibtn" onClick={() => showToast(`Viewing captain ${c.name}`)}><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3C4.5 3 1.5 8 1.5 8S4.5 13 8 13s6.5-5 6.5-5S11.5 3 8 3zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></button></td>
                     </tr>
                   ))}
+                  {(!dashboardData?.eligibleCaptains || dashboardData.eligibleCaptains.length === 0) && (
+                    <tr><td colSpan={6} style={{ textAlign: 'center', padding: '20px', color: 'var(--text-tertiary)' }}>No captains found</td></tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -1709,10 +1760,10 @@ export default function OpsDashboard() {
   const renderLedger = () => (
     <>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '10px', marginBottom: '18px' }}>
-        <div className="m-card"><div className="m-lbl">Today's revenue</div><div className="m-val">₦1.2M</div><div className="m-sub up">↑ 8.4%</div></div>
-        <div className="m-card"><div className="m-lbl">Month to date</div><div className="m-val">₦28.4M</div><div className="m-sub up">↑ 12% vs Mar</div></div>
-        <div className="m-card"><div className="m-lbl">Pending COD</div><div className="m-val">₦340K</div><div className="m-sub dn">12 unsettled</div></div>
-        <div className="m-card"><div className="m-lbl">Outstanding invoices</div><div className="m-val">₦1.8M</div><div className="m-sub dn">5 overdue</div></div>
+        <div className="m-card"><div className="m-lbl">Today's revenue</div><div className="m-val">₦{dashboardData?.todayRevenue?.toLocaleString() || 0}</div><div className="m-sub up">↑ Live</div></div>
+        <div className="m-card"><div className="m-lbl">Month to date</div><div className="m-val">₦{(dashboardData?.todayRevenue * 20)?.toLocaleString() || 0}</div><div className="m-sub up">Estimated</div></div>
+        <div className="m-card"><div className="m-lbl">Pending COD</div><div className="m-val">₦{dashboardData?.pendingCod?.toLocaleString() || 0}</div><div className="m-sub dn">Action needed</div></div>
+        <div className="m-card"><div className="m-lbl">Outstanding invoices</div><div className="m-val">₦{(invoicesList.length * 5000).toLocaleString()}</div><div className="m-sub dn">{invoicesList.length} total</div></div>
       </div>
       <div className="ledger-split">
         <div className="sec">
@@ -1722,20 +1773,17 @@ export default function OpsDashboard() {
               <table>
                 <thead><tr><th>Date</th><th>Shipments</th><th>Revenue</th><th>COD collected</th></tr></thead>
                 <tbody>
-                  {[
-                    ['Apr 23','148','₦1,241,200','₦184,000'],
-                    ['Apr 22','162','₦1,380,400','₦210,000'],
-                    ['Apr 21','140','₦1,190,000','₦176,000'],
-                    ['Apr 20','155','₦1,312,500','₦196,000'],
-                    ['Apr 19','88','₦748,000','₦112,000'],
-                  ].map(([d,s,r,c], i) => (
+                  {ledgerData.map((l: any, i: number) => (
                     <tr key={i}>
-                      <td style={{ fontSize: '11px' }}>{d}</td>
-                      <td className="mono">{s}</td>
-                      <td className="mono" style={{ color: 'var(--green)' }}>{r}</td>
-                      <td className="mono">{c}</td>
+                      <td style={{ fontSize: '11px' }}>{l.date}</td>
+                      <td className="mono">{l.shipments}</td>
+                      <td className="mono" style={{ color: 'var(--green)' }}>{l.revenue}</td>
+                      <td className="mono">{l.codCollected}</td>
                     </tr>
                   ))}
+                  {ledgerData.length === 0 && (
+                    <tr><td colSpan={4} style={{ textAlign: 'center', padding: '20px', color: 'var(--text-tertiary)' }}>No ledger entries found</td></tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -1748,13 +1796,7 @@ export default function OpsDashboard() {
               <table>
                 <thead><tr><th>Merchant</th><th>Amount</th><th>Shipments</th><th>Status</th></tr></thead>
                 <tbody>
-                  {[
-                    ['Konga Nigeria','₦142,000','18','Pending'],
-                    ['Jumia Express','₦98,500','12','Pending'],
-                    ['SwiftMart NG','₦64,200','8','Processed'],
-                    ['ArabaShop','₦35,800','5','Pending'],
-                    ['NaijaDeals','₦18,400','3','Processed'],
-                  ].map(([m,a,s,st], i) => (
+                  {[].map(([m,a,s,st], i) => (
                     <tr key={i}>
                       <td style={{ fontSize: '11px', fontWeight: 500 }}>{m}</td>
                       <td className="mono">{a}</td>
@@ -1762,6 +1804,7 @@ export default function OpsDashboard() {
                       <td>{st === 'Pending' ? <span className="badge badge-amber">Pending</span> : <span className="badge badge-green">Processed</span>}</td>
                     </tr>
                   ))}
+                  <tr><td colSpan={4} style={{ textAlign: 'center', padding: '20px', color: 'var(--text-tertiary)' }}>No pending settlements</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1775,24 +1818,21 @@ export default function OpsDashboard() {
             <table>
               <thead><tr><th>Invoice #</th><th>Client</th><th>Period</th><th>Shipments</th><th>Amount</th><th>Due</th><th>Status</th><th></th></tr></thead>
               <tbody>
-                {[
-                  ['INV-0284','Konga Nigeria','Apr 1–15','280','₦840,000','Apr 30','Unpaid'],
-                  ['INV-0283','Jumia Express','Apr 1–15','194','₦582,000','Apr 30','Unpaid'],
-                  ['INV-0282','SwiftMart NG','Mar 16–31','142','₦426,000','Apr 15','Paid'],
-                  ['INV-0281','ArabaShop','Mar 16–31','88','₦264,000','Apr 15','Overdue'],
-                  ['INV-0280','NaijaDeals','Mar 1–15','64','₦192,000','Apr 1','Paid'],
-                ].map(([inv,cl,per,s,a,due,st], i) => (
+                {invoicesList.map((inv: any, i: number) => (
                   <tr key={i}>
-                    <td className="mono">{inv}</td>
-                    <td style={{ fontSize: '11px', fontWeight: 500 }}>{cl}</td>
-                    <td style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>{per}</td>
-                    <td className="mono">{s}</td>
-                    <td className="mono">{a}</td>
-                    <td style={{ fontSize: '11px' }}>{due}</td>
-                    <td>{st === 'Paid' ? <span className="badge badge-green">Paid</span> : st === 'Overdue' ? <span className="badge badge-red">Overdue</span> : <span className="badge badge-amber">Unpaid</span>}</td>
-                    <td><button className="ibtn" onClick={() => showToast(`Viewing ${inv}`)}><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3C4.5 3 1.5 8 1.5 8S4.5 13 8 13s6.5-5 6.5-5S11.5 3 8 3zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></button></td>
+                    <td className="mono">{inv.invoiceNumber}</td>
+                    <td style={{ fontSize: '11px', fontWeight: 500 }}>{inv.client}</td>
+                    <td style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>{inv.period}</td>
+                    <td className="mono">{inv.shipments}</td>
+                    <td className="mono">{inv.amount}</td>
+                    <td style={{ fontSize: '11px' }}>{inv.due}</td>
+                    <td>{inv.status === 'Paid' ? <span className="badge badge-green">Paid</span> : inv.status === 'Overdue' ? <span className="badge badge-red">Overdue</span> : <span className="badge badge-amber">{inv.status}</span>}</td>
+                    <td><button className="ibtn" onClick={() => showToast(`Viewing ${inv.invoiceNumber}`)}><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3C4.5 3 1.5 8 1.5 8S4.5 13 8 13s6.5-5 6.5-5S11.5 3 8 3zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></button></td>
                   </tr>
                 ))}
+                {invoicesList.length === 0 && (
+                  <tr><td colSpan={8} style={{ textAlign: 'center', padding: '20px', color: 'var(--text-tertiary)' }}>No invoices found</td></tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -2466,6 +2506,40 @@ export default function OpsDashboard() {
 
 
       <div className={`toast ${toastMsg ? 'show' : ''}`}>{toastMsg}</div>
+      {/* Status Update Modal */}
+      <div className={`overlay ${statusModalOpen ? 'open' : ''}`} onClick={(e) => { if (e.target === e.currentTarget) setStatusModalOpen(false) }}>
+        <div className="modal">
+          <div className="modal-hd">
+            <div className="modal-ttl">Update Shipment Status</div>
+            <button className="x-btn" onClick={() => setStatusModalOpen(false)}>✕</button>
+          </div>
+          <div style={{ padding: '20px' }}>
+            <div style={{ marginBottom: '16px', fontSize: '14px', color: 'var(--text-secondary)' }}>
+              Updating waybill: <span style={{ fontWeight: 600, color: 'var(--accent)' }}>{selectedWaybill}</span>
+            </div>
+            <label className="lbl">Select new status</label>
+            <select 
+              className="sel" 
+              value={targetStatus} 
+              onChange={(e) => setTargetStatus(e.target.value)}
+              style={{ width: '100%', padding: '12px', borderRadius: '8px', background: 'var(--bg-surface)', border: '1px solid var(--border)', color: 'var(--text-primary)' }}
+            >
+              <option value="">— Select status —</option>
+              <option value="Processing">Processing</option>
+              <option value="Manifested">Manifested (In Transit)</option>
+              <option value="OutForDelivery">Out for Delivery</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+          <div className="modal-ft">
+            <button className="btn" onClick={() => setStatusModalOpen(false)}>Cancel</button>
+            <button className="btn primary" onClick={confirmUpdateStatus} disabled={isSubmitting || !targetStatus}>
+              {isSubmitting ? 'Updating...' : 'Confirm Status Update'}
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

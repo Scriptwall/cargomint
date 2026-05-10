@@ -9,7 +9,10 @@ public record ManifestSummaryDto(
     string Route,
     string Meta,
     string Note,
-    string Status
+    string Status,
+    string VehicleName,
+    string CaptainName,
+    List<string> GroupIds
 );
 
 public record ManifestsBoardResponse(
@@ -28,6 +31,7 @@ public class GetManifestsHandler(ICargoMintDbContext context, ITenantProvider te
 
         var query = context.Manifests
             .Include(m => m.Items)
+            .Include(m => m.Fleet)
             .Include(m => m.Captain).ThenInclude(c => c.User)
             .AsQueryable();
 
@@ -48,27 +52,36 @@ public class GetManifestsHandler(ICargoMintDbContext context, ITenantProvider te
             .Select(m => new ManifestSummaryDto(
                 m.ManifestCode,
                 $"{(m.DepartureServiceCentre?.Name ?? "UNK")} → {(m.DestinationServiceCentre?.Name ?? "UNK")}",
-                $"{m.Items.Count} shipments",
+                $"{m.Items.Count} items",
                 "Awaiting dispatch",
-                "Pending"
+                "Pending",
+                m.Fleet?.RegistrationNumber ?? "",
+                m.Captain?.User != null ? $"{m.Captain.User.FirstName} {m.Captain.User.LastName}".Trim() : "",
+                m.Items.Where(i => i.ShipmentGroupId.HasValue).Select(i => i.WaybillOrGroupCode ?? "").ToList()
             )).ToList();
 
         var inTransit = manifests.Where(m => m.Status == CargoMint.Domain.Entities.Core.ManifestStatus.Dispatched)
             .Select(m => new ManifestSummaryDto(
                 m.ManifestCode,
                 $"{(m.DepartureServiceCentre?.Name ?? "UNK")} → {(m.DestinationServiceCentre?.Name ?? "UNK")}",
-                $"{m.Items.Count} shipments",
+                $"{m.Items.Count} items",
                 m.Captain?.User?.FirstName ?? "Unknown",
-                "In Transit"
+                "In Transit",
+                m.Fleet?.RegistrationNumber ?? "",
+                m.Captain?.User != null ? $"{m.Captain.User.FirstName} {m.Captain.User.LastName}".Trim() : "",
+                m.Items.Where(i => i.ShipmentGroupId.HasValue).Select(i => i.WaybillOrGroupCode ?? "").ToList()
             )).ToList();
 
         var delivered = manifests.Where(m => m.Status == CargoMint.Domain.Entities.Core.ManifestStatus.Received)
             .Select(m => new ManifestSummaryDto(
                 m.ManifestCode,
                 $"{(m.DepartureServiceCentre?.Name ?? "UNK")} → {(m.DestinationServiceCentre?.Name ?? "UNK")}",
-                $"{m.Items.Count} shipments",
+                $"{m.Items.Count} items",
                 "Completed",
-                "Delivered"
+                "Delivered",
+                m.Fleet?.RegistrationNumber ?? "",
+                m.Captain?.User != null ? $"{m.Captain.User.FirstName} {m.Captain.User.LastName}".Trim() : "",
+                m.Items.Where(i => i.ShipmentGroupId.HasValue).Select(i => i.WaybillOrGroupCode ?? "").ToList()
             )).ToList();
 
         return new ManifestsBoardResponse(pending, inTransit, delivered);

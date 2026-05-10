@@ -68,5 +68,10 @@ public class LogisticsController(IMediator mediator) : ControllerBase
     {
         return Ok(await mediator.Send(new GetLogisticsStationsQuery()));
     }
+    [HttpGet("fleet")]
+    public async Task<IActionResult> GetFleet()
+    {
+        return Ok(await mediator.Send(new GetFleetQuery()));
+    }
 }
 

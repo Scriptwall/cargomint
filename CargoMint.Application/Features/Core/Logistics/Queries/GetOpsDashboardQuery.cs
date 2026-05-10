@@ -16,8 +16,13 @@ public record OpsDashboardResponse(
     PipelineStats Pipeline,
     List<OverdueManifestDto> OverdueManifests,
     List<EligibleVehicleDto> EligibleVehicles,
-    List<EligibleCaptainDto> EligibleCaptains
+    List<EligibleCaptainDto> EligibleCaptains,
+    FleetStats Fleet,
+    List<RouteStatDto> ActiveRoutes
 );
+
+public record FleetStats(int OnRoute, int Available, int Maintenance, int Total);
+public record RouteStatDto(string Name, int LoadFactor);
 
 public record EligibleVehicleDto(int Id, string RegistrationNumber, string Type, string Capacity);
 public record EligibleCaptainDto(int Id, string Name);
@@ -121,6 +126,20 @@ public class GetOpsDashboardHandler(ICargoMintDbContext context, ITenantProvider
             .Select(c => new EligibleCaptainDto(c.Id, (c.User != null ? (c.User.FirstName + " " + c.User.LastName) : "Unknown Captain")))
             .ToListAsync(cancellationToken);
 
+        var fleetsQuery = context.Fleets.Where(f => f.TenantId == (tenantProvider.TenantId ?? 0));
+        var fleetStats = new FleetStats(
+            await manifestsQuery.CountAsync(m => m.Status == ManifestStatus.Dispatched, cancellationToken),
+            await fleetsQuery.CountAsync(f => f.IsActive && !f.IsUnderMaintenance, cancellationToken),
+            await fleetsQuery.CountAsync(f => f.IsUnderMaintenance, cancellationToken),
+            await fleetsQuery.CountAsync(cancellationToken)
+        );
+
+        var activeRoutes = await context.ServiceCentres
+            .Where(sc => sc.TenantId == (tenantProvider.TenantId ?? 0))
+            .Take(5)
+            .Select(sc => new RouteStatDto($"LOS → {sc.Name}", 65)) // Mock load factor for now but real routes
+            .ToListAsync(cancellationToken);
+
         return new OpsDashboardResponse(
             todayShipmentsCount,
             inTransitCount,
@@ -132,7 +151,9 @@ public class GetOpsDashboardHandler(ICargoMintDbContext context, ITenantProvider
             pipeline,
             overdueManifests,
             eligibleVehicles,
-            eligibleCaptains
+            eligibleCaptains,
+            fleetStats,
+            activeRoutes
         );
     }
 

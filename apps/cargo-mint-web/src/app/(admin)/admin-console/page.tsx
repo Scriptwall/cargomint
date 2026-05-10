@@ -405,7 +405,7 @@ export default function AdminConsolePage() {
   const showToast = (message: string) => {
     setToastMessage(message);
     if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current);
-    toastTimerRef.current = window.setTimeout(() => setToastMessage(''), 2600);
+    toastTimerRef.current = window.setTimeout(() => setToastMessage(''), 10000);
   };
 
   const openNewTenantModal = () => {
