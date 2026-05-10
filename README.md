@@ -6,6 +6,8 @@
 
 **CargoMint** is a high-performance, multi-tenant logistics operating system engineered for the African market. It serves as the unified system of record for shipments, delivery status, COD, and actor relationships.
 
+**Developed by: [Omoigui Efosa Abel](mailto:efe.omoigui@gmail.com)**
+
 ---
 
 ## 🌟 Overview
