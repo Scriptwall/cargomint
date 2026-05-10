@@ -1,0 +1,775 @@
+stationName,code,stateName,countryName,zoneRuleLocal,zoneRuleCrossState,etaHoursLocal,etaHoursCrossState
+Aba North,AB-ABANO-0001,Abia,Nigeria,Zone 1,Zone 4,6,24
+Aba South,AB-ABASO-0002,Abia,Nigeria,Zone 1,Zone 4,6,24
+Arochukwu,AB-AROCHU-0003,Abia,Nigeria,Zone 1,Zone 4,6,24
+Bende,AB-BENDE-0004,Abia,Nigeria,Zone 1,Zone 4,6,24
+Ikwuano,AB-IKWUAN-0005,Abia,Nigeria,Zone 1,Zone 4,6,24
+Isiala Ngwa North,AB-ISIALA-0006,Abia,Nigeria,Zone 1,Zone 4,6,24
+Isiala Ngwa South,AB-ISIALA-0007,Abia,Nigeria,Zone 1,Zone 4,6,24
+Isuikwuato,AB-ISUIKW-0008,Abia,Nigeria,Zone 1,Zone 4,6,24
+Obi Ngwa,AB-OBING-0009,Abia,Nigeria,Zone 1,Zone 4,6,24
+Ohafia,AB-OHAFIA-0010,Abia,Nigeria,Zone 1,Zone 4,6,24
+Osisioma,AB-OSISIO-0011,Abia,Nigeria,Zone 1,Zone 4,6,24
+Ugwunagbo,AB-UGWUNA-0012,Abia,Nigeria,Zone 1,Zone 4,6,24
+Ukwa East,AB-UKWAE-0013,Abia,Nigeria,Zone 1,Zone 4,6,24
+Ukwa West,AB-UKWAW-0014,Abia,Nigeria,Zone 1,Zone 4,6,24
+Umu-Nneochi,AB-UMUNN-0015,Abia,Nigeria,Zone 1,Zone 4,6,24
+Umuahia North,AB-UMUAHI-0016,Abia,Nigeria,Zone 1,Zone 4,6,24
+Umuahia South,AB-UMUAHI-0017,Abia,Nigeria,Zone 1,Zone 4,6,24
+Demsa,AD-DEMSA-0018,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Fufore,AD-FUFORE-0019,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Ganye,AD-GANYE-0020,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Girei,AD-GIREI-0021,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Gombi,AD-GOMBI-0022,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Guyuk,AD-GUYUK-0023,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Hong,AD-HONG-0024,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Jada,AD-JADA-0025,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Lamurde,AD-LAMURD-0026,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Madagali,AD-MADAGA-0027,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Maiha,AD-MAIHA-0028,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Mayo Belwa,AD-MAYOB-0029,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Michika,AD-MICHIK-0030,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Mubi North,AD-MUBIN-0031,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Mubi South,AD-MUBIS-0032,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Numan,AD-NUMAN-0033,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Shelleng,AD-SHELLE-0034,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Song,AD-SONG-0035,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Toungo,AD-TOUNGO-0036,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Yola North,AD-YOLAN-0037,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Yola South,AD-YOLAS-0038,Adamawa,Nigeria,Zone 1,Zone 4,6,24
+Abak,AK-ABAK-0039,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Eastern Obolo,AK-EASTER-0040,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Eket,AK-EKET-0041,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Esit Eket,AK-ESITE-0042,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Essien Udim,AK-ESSIEN-0043,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Etim Ekpo,AK-ETIME-0044,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Etinan,AK-ETINAN-0045,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Ibeno,AK-IBENO-0046,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Ibesikpo Asutan,AK-IBESIK-0047,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Ibiono Ibom,AK-IBIONO-0048,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Ika,AK-IKA-0049,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Ikono,AK-IKONO-0050,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Ikot Abasi,AK-IKOTA-0051,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Ikot Ekpene,AK-IKOTE-0052,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Ini,AK-INI-0053,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Itu,AK-ITU-0054,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Mbo,AK-MBO-0055,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Mkpat Enin,AK-MKPAT-0056,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Nsit Atai,AK-NSITA-0057,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Nsit Ibom,AK-NSITI-0058,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Nsit Ubium,AK-NSITU-0059,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Obot Akara,AK-OBOTA-0060,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Okobo,AK-OKOBO-0061,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Onna,AK-ONNA-0062,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Oron,AK-ORON-0063,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Oruk Anam,AK-ORUKA-0064,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Udung Uko,AK-UDUNG-0065,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Ukanafun,AK-UKANAF-0066,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Uruan,AK-URUAN-0067,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Urue Offong/Oruko,AK-URUEO-0068,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Uyo,AK-UYO-0069,Akwa Ibom,Nigeria,Zone 1,Zone 4,6,24
+Aguata,AN-AGUATA-0070,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Anambra East,AN-ANAMBR-0071,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Anambra West,AN-ANAMBR-0072,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Anaocha,AN-ANAOCH-0073,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Awka North,AN-AWKAN-0074,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Awka South,AN-AWKAS-0075,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Ayamelum,AN-AYAMEL-0076,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Dunukofia,AN-DUNUKO-0077,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Ekwusigo,AN-EKWUSI-0078,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Idemili North,AN-IDEMIL-0079,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Idemili South,AN-IDEMIL-0080,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Ihiala,AN-IHIALA-0081,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Njikoka,AN-NJIKOK-0082,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Nnewi North,AN-NNEWI-0083,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Nnewi South,AN-NNEWI-0084,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Ogbaru,AN-OGBARU-0085,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Onitsha North,AN-ONITSH-0086,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Onitsha South,AN-ONITSH-0087,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Orumba North,AN-ORUMBA-0088,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Orumba South,AN-ORUMBA-0089,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Oyi,AN-OYI-0090,Anambra,Nigeria,Zone 1,Zone 4,6,24
+Alkaleri,BA-ALKALE-0091,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Bauchi,BA-BAUCHI-0092,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Bogoro,BA-BOGORO-0093,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Damban,BA-DAMBAN-0094,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Darazo,BA-DARAZO-0095,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Dass,BA-DASS-0096,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Gamawa,BA-GAMAWA-0097,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Ganjuwa,BA-GANJUW-0098,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Giade,BA-GIADE-0099,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Itas/Gadau,BA-ITASG-0100,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Jama'are,BA-JAMAA-0101,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Katagum,BA-KATAGU-0102,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Kirfi,BA-KIRFI-0103,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Misau,BA-MISAU-0104,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Ningi,BA-NINGI-0105,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Shira,BA-SHIRA-0106,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Tafawa Balewa,BA-TAFAWA-0107,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Toro,BA-TORO-0108,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Warji,BA-WARJI-0109,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Zaki,BA-ZAKI-0110,Bauchi,Nigeria,Zone 1,Zone 4,6,24
+Brass,BY-BRASS-0111,Bayelsa,Nigeria,Zone 1,Zone 4,6,24
+Ekeremor,BY-EKEREM-0112,Bayelsa,Nigeria,Zone 1,Zone 4,6,24
+Kolokuma/Opokuma,BY-KOLOKU-0113,Bayelsa,Nigeria,Zone 1,Zone 4,6,24
+Nembe,BY-NEMBE-0114,Bayelsa,Nigeria,Zone 1,Zone 4,6,24
+Ogbia,BY-OGBIA-0115,Bayelsa,Nigeria,Zone 1,Zone 4,6,24
+Sagbama,BY-SAGBAM-0116,Bayelsa,Nigeria,Zone 1,Zone 4,6,24
+Southern Ijaw,BY-SOUTHE-0117,Bayelsa,Nigeria,Zone 1,Zone 4,6,24
+Yenagoa,BY-YENAGO-0118,Bayelsa,Nigeria,Zone 1,Zone 4,6,24
+Ado,BE-ADO-0119,Benue,Nigeria,Zone 1,Zone 4,6,24
+Agatu,BE-AGATU-0120,Benue,Nigeria,Zone 1,Zone 4,6,24
+Apa,BE-APA-0121,Benue,Nigeria,Zone 1,Zone 4,6,24
+Buruku,BE-BURUKU-0122,Benue,Nigeria,Zone 1,Zone 4,6,24
+Gboko,BE-GBOKO-0123,Benue,Nigeria,Zone 1,Zone 4,6,24
+Guma,BE-GUMA-0124,Benue,Nigeria,Zone 1,Zone 4,6,24
+Gwer East,BE-GWERE-0125,Benue,Nigeria,Zone 1,Zone 4,6,24
+Gwer West,BE-GWERW-0126,Benue,Nigeria,Zone 1,Zone 4,6,24
+Katsina Ala,BE-KATSIN-0127,Benue,Nigeria,Zone 1,Zone 4,6,24
+Konshisha,BE-KONSHI-0128,Benue,Nigeria,Zone 1,Zone 4,6,24
+Kwande,BE-KWANDE-0129,Benue,Nigeria,Zone 1,Zone 4,6,24
+Logo,BE-LOGO-0130,Benue,Nigeria,Zone 1,Zone 4,6,24
+Makurdi,BE-MAKURD-0131,Benue,Nigeria,Zone 1,Zone 4,6,24
+Obi,BE-OBI-0132,Benue,Nigeria,Zone 1,Zone 4,6,24
+Ogbadibo,BE-OGBADI-0133,Benue,Nigeria,Zone 1,Zone 4,6,24
+Ohimini,BE-OHIMIN-0134,Benue,Nigeria,Zone 1,Zone 4,6,24
+Oju,BE-OJU-0135,Benue,Nigeria,Zone 1,Zone 4,6,24
+Okpokwu,BE-OKPOKW-0136,Benue,Nigeria,Zone 1,Zone 4,6,24
+Otukpo,BE-OTUKPO-0137,Benue,Nigeria,Zone 1,Zone 4,6,24
+Tarka,BE-TARKA-0138,Benue,Nigeria,Zone 1,Zone 4,6,24
+Ukum,BE-UKUM-0139,Benue,Nigeria,Zone 1,Zone 4,6,24
+Ushongo,BE-USHONG-0140,Benue,Nigeria,Zone 1,Zone 4,6,24
+Vandeikya,BE-VANDEI-0141,Benue,Nigeria,Zone 1,Zone 4,6,24
+Abadam,BO-ABADAM-0142,Borno,Nigeria,Zone 1,Zone 4,6,24
+Askira/Uba,BO-ASKIRA-0143,Borno,Nigeria,Zone 1,Zone 4,6,24
+Bama,BO-BAMA-0144,Borno,Nigeria,Zone 1,Zone 4,6,24
+Bayo,BO-BAYO-0145,Borno,Nigeria,Zone 1,Zone 4,6,24
+Biu,BO-BIU-0146,Borno,Nigeria,Zone 1,Zone 4,6,24
+Chibok,BO-CHIBOK-0147,Borno,Nigeria,Zone 1,Zone 4,6,24
+Damboa,BO-DAMBOA-0148,Borno,Nigeria,Zone 1,Zone 4,6,24
+Dikwa,BO-DIKWA-0149,Borno,Nigeria,Zone 1,Zone 4,6,24
+Gubio,BO-GUBIO-0150,Borno,Nigeria,Zone 1,Zone 4,6,24
+Guzamala,BO-GUZAMA-0151,Borno,Nigeria,Zone 1,Zone 4,6,24
+Gwoza,BO-GWOZA-0152,Borno,Nigeria,Zone 1,Zone 4,6,24
+Hawul,BO-HAWUL-0153,Borno,Nigeria,Zone 1,Zone 4,6,24
+Jere,BO-JERE-0154,Borno,Nigeria,Zone 1,Zone 4,6,24
+Kaga,BO-KAGA-0155,Borno,Nigeria,Zone 1,Zone 4,6,24
+Kala/Balge,BO-KALAB-0156,Borno,Nigeria,Zone 1,Zone 4,6,24
+Konduga,BO-KONDUG-0157,Borno,Nigeria,Zone 1,Zone 4,6,24
+Kukawa,BO-KUKAWA-0158,Borno,Nigeria,Zone 1,Zone 4,6,24
+Kwaya Kusar,BO-KWAYA-0159,Borno,Nigeria,Zone 1,Zone 4,6,24
+Mafa,BO-MAFA-0160,Borno,Nigeria,Zone 1,Zone 4,6,24
+Magumeri,BO-MAGUME-0161,Borno,Nigeria,Zone 1,Zone 4,6,24
+Maiduguri,BO-MAIDUG-0162,Borno,Nigeria,Zone 1,Zone 4,6,24
+Marte,BO-MARTE-0163,Borno,Nigeria,Zone 1,Zone 4,6,24
+Mobbar,BO-MOBBAR-0164,Borno,Nigeria,Zone 1,Zone 4,6,24
+Monguno,BO-MONGUN-0165,Borno,Nigeria,Zone 1,Zone 4,6,24
+Ngala,BO-NGALA-0166,Borno,Nigeria,Zone 1,Zone 4,6,24
+Nganzai,BO-NGANZA-0167,Borno,Nigeria,Zone 1,Zone 4,6,24
+Shani,BO-SHANI-0168,Borno,Nigeria,Zone 1,Zone 4,6,24
+Abi,CR-ABI-0169,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Akamkpa,CR-AKAMKP-0170,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Akpabuyo,CR-AKPABU-0171,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Bakassi,CR-BAKASS-0172,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Bekwarra,CR-BEKWAR-0173,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Biase,CR-BIASE-0174,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Boki,CR-BOKI-0175,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Calabar Municipal,CR-CALABA-0176,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Calabar South,CR-CALABA-0177,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Etung,CR-ETUNG-0178,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Ikom,CR-IKOM-0179,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Obanliku,CR-OBANLI-0180,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Obubra,CR-OBUBRA-0181,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Obudu,CR-OBUDU-0182,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Odukpani,CR-ODUKPA-0183,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Ogoja,CR-OGOJA-0184,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Yakurr,CR-YAKURR-0185,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Yala,CR-YALA-0186,Cross River,Nigeria,Zone 1,Zone 4,6,24
+Aniocha North,DE-ANIOCH-0187,Delta,Nigeria,Zone 1,Zone 4,6,24
+Aniocha South,DE-ANIOCH-0188,Delta,Nigeria,Zone 1,Zone 4,6,24
+Bomadi,DE-BOMADI-0189,Delta,Nigeria,Zone 1,Zone 4,6,24
+Burutu,DE-BURUTU-0190,Delta,Nigeria,Zone 1,Zone 4,6,24
+Ethiope East,DE-ETHIOP-0191,Delta,Nigeria,Zone 1,Zone 4,6,24
+Ethiope West,DE-ETHIOP-0192,Delta,Nigeria,Zone 1,Zone 4,6,24
+Ika North East,DE-IKANO-0193,Delta,Nigeria,Zone 1,Zone 4,6,24
+Ika South,DE-IKASO-0194,Delta,Nigeria,Zone 1,Zone 4,6,24
+Isoko North,DE-ISOKO-0195,Delta,Nigeria,Zone 1,Zone 4,6,24
+Isoko South,DE-ISOKO-0196,Delta,Nigeria,Zone 1,Zone 4,6,24
+Ndokwa East,DE-NDOKWA-0197,Delta,Nigeria,Zone 1,Zone 4,6,24
+Ndokwa West,DE-NDOKWA-0198,Delta,Nigeria,Zone 1,Zone 4,6,24
+Okpe,DE-OKPE-0199,Delta,Nigeria,Zone 1,Zone 4,6,24
+Oshimili North,DE-OSHIMI-0200,Delta,Nigeria,Zone 1,Zone 4,6,24
+Oshimili South,DE-OSHIMI-0201,Delta,Nigeria,Zone 1,Zone 4,6,24
+Patani,DE-PATANI-0202,Delta,Nigeria,Zone 1,Zone 4,6,24
+Sapele,DE-SAPELE-0203,Delta,Nigeria,Zone 1,Zone 4,6,24
+Udu,DE-UDU-0204,Delta,Nigeria,Zone 1,Zone 4,6,24
+Ughelli North,DE-UGHELL-0205,Delta,Nigeria,Zone 1,Zone 4,6,24
+Ughelli South,DE-UGHELL-0206,Delta,Nigeria,Zone 1,Zone 4,6,24
+Ukwuani,DE-UKWUAN-0207,Delta,Nigeria,Zone 1,Zone 4,6,24
+Uvwie,DE-UVWIE-0208,Delta,Nigeria,Zone 1,Zone 4,6,24
+Warri North,DE-WARRI-0209,Delta,Nigeria,Zone 1,Zone 4,6,24
+Warri South,DE-WARRI-0210,Delta,Nigeria,Zone 1,Zone 4,6,24
+Warri South West,DE-WARRI-0211,Delta,Nigeria,Zone 1,Zone 4,6,24
+Abakaliki,EB-ABAKAL-0212,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Afikpo North,EB-AFIKPO-0213,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Afikpo South,EB-AFIKPO-0214,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Ebonyi,EB-EBONYI-0215,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Ezza North,EB-EZZAN-0216,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Ezza South,EB-EZZAS-0217,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Ishielu,EB-ISHIEL-0218,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Ivo,EB-IVO-0219,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Izzi,EB-IZZI-0220,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Ohaozara,EB-OHAOZA-0221,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Ohaukwu,EB-OHAUKW-0222,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Onicha,EB-ONICHA-0223,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Ikwo,EB-IKWO-0224,Ebonyi,Nigeria,Zone 1,Zone 4,6,24
+Akoko Edo,ED-AKOKO-0225,Edo,Nigeria,Zone 1,Zone 4,6,24
+Egor,ED-EGOR-0226,Edo,Nigeria,Zone 1,Zone 4,6,24
+Esan Central,ED-ESANC-0227,Edo,Nigeria,Zone 1,Zone 4,6,24
+Esan North East,ED-ESANN-0228,Edo,Nigeria,Zone 1,Zone 4,6,24
+Esan South East,ED-ESANS-0229,Edo,Nigeria,Zone 1,Zone 4,6,24
+Esan West,ED-ESANW-0230,Edo,Nigeria,Zone 1,Zone 4,6,24
+Etsako Central,ED-ETSAKO-0231,Edo,Nigeria,Zone 1,Zone 4,6,24
+Etsako East,ED-ETSAKO-0232,Edo,Nigeria,Zone 1,Zone 4,6,24
+Etsako West,ED-ETSAKO-0233,Edo,Nigeria,Zone 1,Zone 4,6,24
+Igueben,ED-IGUEBE-0234,Edo,Nigeria,Zone 1,Zone 4,6,24
+Ikpoba Okha,ED-IKPOBA-0235,Edo,Nigeria,Zone 1,Zone 4,6,24
+Oredo,ED-OREDO-0236,Edo,Nigeria,Zone 1,Zone 4,6,24
+Orhionmwon,ED-ORHION-0237,Edo,Nigeria,Zone 1,Zone 4,6,24
+Ovia North East,ED-OVIAN-0238,Edo,Nigeria,Zone 1,Zone 4,6,24
+Ovia South West,ED-OVIAS-0239,Edo,Nigeria,Zone 1,Zone 4,6,24
+Owan East,ED-OWANE-0240,Edo,Nigeria,Zone 1,Zone 4,6,24
+Owan West,ED-OWANW-0241,Edo,Nigeria,Zone 1,Zone 4,6,24
+Uhunmwonde,ED-UHUNMW-0242,Edo,Nigeria,Zone 1,Zone 4,6,24
+Ado-Ekiti,EK-ADOEK-0243,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Efon,EK-EFON-0244,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Ekiti East,EK-EKITI-0245,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Ekiti South West,EK-EKITI-0246,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Ekiti West,EK-EKITI-0247,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Emure,EK-EMURE-0248,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Gbonyin,EK-GBONYI-0249,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Ido-Osi,EK-IDOOS-0250,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Ijero,EK-IJERO-0251,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Ikere,EK-IKERE-0252,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Ikole,EK-IKOLE-0253,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Ilejemeje,EK-ILEJEM-0254,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Irepodun/Ifelodun,EK-IREPOD-0255,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Ise/Orun,EK-ISEOR-0256,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Moba,EK-MOBA-0257,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Oye,EK-OYE-0258,Ekiti,Nigeria,Zone 1,Zone 4,6,24
+Aninri,EN-ANINRI-0259,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Awgu,EN-AWGU-0260,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Enugu East,EN-ENUGU-0261,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Enugu North,EN-ENUGU-0262,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Enugu South,EN-ENUGU-0263,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Ezeagu,EN-EZEAGU-0264,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Igbo Etiti,EN-IGBOE-0265,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Igbo Eze North,EN-IGBOE-0266,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Igbo Eze South,EN-IGBOE-0267,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Isi-Uzo,EN-ISIUZ-0268,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Nkanu East,EN-NKANU-0269,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Nkanu West,EN-NKANU-0270,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Nsukka,EN-NSUKKA-0271,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Oji-River,EN-OJIRI-0272,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Udenu,EN-UDENU-0273,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Udi,EN-UDI-0274,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Uzo-Uwani,EN-UZOUW-0275,Enugu,Nigeria,Zone 1,Zone 4,6,24
+Abaji,FC-ABAJI-0276,Federal Capital Territory,Nigeria,Zone 1,Zone 4,6,24
+Abuja,FC-ABUJA-0277,Federal Capital Territory,Nigeria,Zone 1,Zone 4,6,24
+Bwari,FC-BWARI-0278,Federal Capital Territory,Nigeria,Zone 1,Zone 4,6,24
+Gwagwalada,FC-GWAGWA-0279,Federal Capital Territory,Nigeria,Zone 1,Zone 4,6,24
+Kuje,FC-KUJE-0280,Federal Capital Territory,Nigeria,Zone 1,Zone 4,6,24
+Kwali,FC-KWALI-0281,Federal Capital Territory,Nigeria,Zone 1,Zone 4,6,24
+Akko,GO-AKKO-0282,Gombe,Nigeria,Zone 1,Zone 4,6,24
+Balanga,GO-BALANG-0283,Gombe,Nigeria,Zone 1,Zone 4,6,24
+Billiri,GO-BILLIR-0284,Gombe,Nigeria,Zone 1,Zone 4,6,24
+Dukku,GO-DUKKU-0285,Gombe,Nigeria,Zone 1,Zone 4,6,24
+Funakaye,GO-FUNAKA-0286,Gombe,Nigeria,Zone 1,Zone 4,6,24
+Gombe,GO-GOMBE-0287,Gombe,Nigeria,Zone 1,Zone 4,6,24
+Kaltungo,GO-KALTUN-0288,Gombe,Nigeria,Zone 1,Zone 4,6,24
+Kwami,GO-KWAMI-0289,Gombe,Nigeria,Zone 1,Zone 4,6,24
+Nafada,GO-NAFADA-0290,Gombe,Nigeria,Zone 1,Zone 4,6,24
+Shongom,GO-SHONGO-0291,Gombe,Nigeria,Zone 1,Zone 4,6,24
+Yamaltu/Deba,GO-YAMALT-0292,Gombe,Nigeria,Zone 1,Zone 4,6,24
+Aboh Mbaise,IM-ABOHM-0293,Imo,Nigeria,Zone 1,Zone 4,6,24
+Ahiazu Mbaise,IM-AHIAZU-0294,Imo,Nigeria,Zone 1,Zone 4,6,24
+Ehime Mbano,IM-EHIME-0295,Imo,Nigeria,Zone 1,Zone 4,6,24
+Ezinihitte Mbaise,IM-EZINIH-0296,Imo,Nigeria,Zone 1,Zone 4,6,24
+Ideato North,IM-IDEATO-0297,Imo,Nigeria,Zone 1,Zone 4,6,24
+Ideato South,IM-IDEATO-0298,Imo,Nigeria,Zone 1,Zone 4,6,24
+Ihitte/Uboma,IM-IHITTE-0299,Imo,Nigeria,Zone 1,Zone 4,6,24
+Ikeduru,IM-IKEDUR-0300,Imo,Nigeria,Zone 1,Zone 4,6,24
+Isiala Mbano,IM-ISIALA-0301,Imo,Nigeria,Zone 1,Zone 4,6,24
+Isu,IM-ISU-0302,Imo,Nigeria,Zone 1,Zone 4,6,24
+Mbaitoli,IM-MBAITO-0303,Imo,Nigeria,Zone 1,Zone 4,6,24
+Ngor Okpala,IM-NGORO-0304,Imo,Nigeria,Zone 1,Zone 4,6,24
+Njaba,IM-NJABA-0305,Imo,Nigeria,Zone 1,Zone 4,6,24
+Nkwerre,IM-NKWERR-0306,Imo,Nigeria,Zone 1,Zone 4,6,24
+Nwangele,IM-NWANGE-0307,Imo,Nigeria,Zone 1,Zone 4,6,24
+Obowo,IM-OBOWO-0308,Imo,Nigeria,Zone 1,Zone 4,6,24
+Oguta,IM-OGUTA-0309,Imo,Nigeria,Zone 1,Zone 4,6,24
+Ohaji/Egbema,IM-OHAJI-0310,Imo,Nigeria,Zone 1,Zone 4,6,24
+Okigwe,IM-OKIGWE-0311,Imo,Nigeria,Zone 1,Zone 4,6,24
+Onuimo,IM-ONUIMO-0312,Imo,Nigeria,Zone 1,Zone 4,6,24
+Orlu,IM-ORLU-0313,Imo,Nigeria,Zone 1,Zone 4,6,24
+Orsu,IM-ORSU-0314,Imo,Nigeria,Zone 1,Zone 4,6,24
+Oru East,IM-ORUEA-0315,Imo,Nigeria,Zone 1,Zone 4,6,24
+Oru West,IM-ORUWE-0316,Imo,Nigeria,Zone 1,Zone 4,6,24
+Owerri Municipal,IM-OWERRI-0317,Imo,Nigeria,Zone 1,Zone 4,6,24
+Owerri North,IM-OWERRI-0318,Imo,Nigeria,Zone 1,Zone 4,6,24
+Owerri West,IM-OWERRI-0319,Imo,Nigeria,Zone 1,Zone 4,6,24
+Auyo,JI-AUYO-0320,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Babura,JI-BABURA-0321,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Biriniwa,JI-BIRINI-0322,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Birnin Kudu,JI-BIRNIN-0323,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Buji,JI-BUJI-0324,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Dutse,JI-DUTSE-0325,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Gagarawa,JI-GAGARA-0326,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Garki,JI-GARKI-0327,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Gumel,JI-GUMEL-0328,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Guri,JI-GURI-0329,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Gwaram,JI-GWARAM-0330,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Gwiwa,JI-GWIWA-0331,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Hadejia,JI-HADEJI-0332,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Jahun,JI-JAHUN-0333,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Kafin Hausa,JI-KAFIN-0334,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Kaugama,JI-KAUGAM-0335,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Kazaure,JI-KAZAUR-0336,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Kiri Kasama,JI-KIRIK-0337,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Kiyawa,JI-KIYAWA-0338,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Maigatari,JI-MAIGAT-0339,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Malam Madori,JI-MALAM-0340,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Miga,JI-MIGA-0341,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Ringim,JI-RINGIM-0342,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Roni,JI-RONI-0343,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Sule Tankarkar,JI-SULET-0344,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Taura,JI-TAURA-0345,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Yankwashi,JI-YANKWA-0346,Jigawa,Nigeria,Zone 1,Zone 4,6,24
+Birnin Gwari,KD-BIRNIN-0347,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Chikun,KD-CHIKUN-0348,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Giwa,KD-GIWA-0349,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Igabi,KD-IGABI-0350,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Ikara,KD-IKARA-0351,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Jaba,KD-JABA-0352,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Jema'a,KD-JEMAA-0353,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Kachia,KD-KACHIA-0354,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Kaduna North,KD-KADUNA-0355,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Kaduna South,KD-KADUNA-0356,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Kagarko,KD-KAGARK-0357,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Kajuru,KD-KAJURU-0358,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Kaura,KD-KAURA-0359,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Kauru,KD-KAURU-0360,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Kubau,KD-KUBAU-0361,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Kudan,KD-KUDAN-0362,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Lere,KD-LERE-0363,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Makarfi,KD-MAKARF-0364,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Sabon Gari,KD-SABON-0365,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Sanga,KD-SANGA-0366,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Soba,KD-SOBA-0367,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Zangon Kataf,KD-ZANGON-0368,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Zaria,KD-ZARIA-0369,Kaduna,Nigeria,Zone 1,Zone 4,6,24
+Ajingi,KN-AJINGI-0370,Kano,Nigeria,Zone 1,Zone 4,6,24
+Albasu,KN-ALBASU-0371,Kano,Nigeria,Zone 1,Zone 4,6,24
+Bagwai,KN-BAGWAI-0372,Kano,Nigeria,Zone 1,Zone 4,6,24
+Bebeji,KN-BEBEJI-0373,Kano,Nigeria,Zone 1,Zone 4,6,24
+Bichi,KN-BICHI-0374,Kano,Nigeria,Zone 1,Zone 4,6,24
+Bunkure,KN-BUNKUR-0375,Kano,Nigeria,Zone 1,Zone 4,6,24
+Dala,KN-DALA-0376,Kano,Nigeria,Zone 1,Zone 4,6,24
+Dambatta,KN-DAMBAT-0377,Kano,Nigeria,Zone 1,Zone 4,6,24
+Dawakin Kudu,KN-DAWAKI-0378,Kano,Nigeria,Zone 1,Zone 4,6,24
+Dawakin Tofa,KN-DAWAKI-0379,Kano,Nigeria,Zone 1,Zone 4,6,24
+Doguwa,KN-DOGUWA-0380,Kano,Nigeria,Zone 1,Zone 4,6,24
+Fagge,KN-FAGGE-0381,Kano,Nigeria,Zone 1,Zone 4,6,24
+Gabasawa,KN-GABASA-0382,Kano,Nigeria,Zone 1,Zone 4,6,24
+Garko,KN-GARKO-0383,Kano,Nigeria,Zone 1,Zone 4,6,24
+Garun Malam,KN-GARUN-0384,Kano,Nigeria,Zone 1,Zone 4,6,24
+Gaya,KN-GAYA-0385,Kano,Nigeria,Zone 1,Zone 4,6,24
+Gezawa,KN-GEZAWA-0386,Kano,Nigeria,Zone 1,Zone 4,6,24
+Gwale,KN-GWALE-0387,Kano,Nigeria,Zone 1,Zone 4,6,24
+Gwarzo,KN-GWARZO-0388,Kano,Nigeria,Zone 1,Zone 4,6,24
+Kabo,KN-KABO-0389,Kano,Nigeria,Zone 1,Zone 4,6,24
+Kano Municipal,KN-KANOM-0390,Kano,Nigeria,Zone 1,Zone 4,6,24
+Karaye,KN-KARAYE-0391,Kano,Nigeria,Zone 1,Zone 4,6,24
+Kibiya,KN-KIBIYA-0392,Kano,Nigeria,Zone 1,Zone 4,6,24
+Kiru,KN-KIRU-0393,Kano,Nigeria,Zone 1,Zone 4,6,24
+Kunchi,KN-KUNCHI-0394,Kano,Nigeria,Zone 1,Zone 4,6,24
+Kura,KN-KURA-0395,Kano,Nigeria,Zone 1,Zone 4,6,24
+Madobi,KN-MADOBI-0396,Kano,Nigeria,Zone 1,Zone 4,6,24
+Makoda,KN-MAKODA-0397,Kano,Nigeria,Zone 1,Zone 4,6,24
+Minjibir,KN-MINJIB-0398,Kano,Nigeria,Zone 1,Zone 4,6,24
+Nasarawa,KN-NASARA-0399,Kano,Nigeria,Zone 1,Zone 4,6,24
+Rano,KN-RANO-0400,Kano,Nigeria,Zone 1,Zone 4,6,24
+Rimin Gado,KN-RIMIN-0401,Kano,Nigeria,Zone 1,Zone 4,6,24
+Rogo,KN-ROGO-0402,Kano,Nigeria,Zone 1,Zone 4,6,24
+Shanono,KN-SHANON-0403,Kano,Nigeria,Zone 1,Zone 4,6,24
+Sumaila,KN-SUMAIL-0404,Kano,Nigeria,Zone 1,Zone 4,6,24
+Takai,KN-TAKAI-0405,Kano,Nigeria,Zone 1,Zone 4,6,24
+Tarauni,KN-TARAUN-0406,Kano,Nigeria,Zone 1,Zone 4,6,24
+Tofa,KN-TOFA-0407,Kano,Nigeria,Zone 1,Zone 4,6,24
+Tsanyawa,KN-TSANYA-0408,Kano,Nigeria,Zone 1,Zone 4,6,24
+Tudun Wada,KN-TUDUN-0409,Kano,Nigeria,Zone 1,Zone 4,6,24
+Ungogo,KN-UNGOGO-0410,Kano,Nigeria,Zone 1,Zone 4,6,24
+Warawa,KN-WARAWA-0411,Kano,Nigeria,Zone 1,Zone 4,6,24
+Wudil,KN-WUDIL-0412,Kano,Nigeria,Zone 1,Zone 4,6,24
+kumbotso,KN-KUMBOT-0413,Kano,Nigeria,Zone 1,Zone 4,6,24
+Bakori,KT-BAKORI-0414,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Batagarawa,KT-BATAGA-0415,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Batsari,KT-BATSAR-0416,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Baure,KT-BAURE-0417,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Bindawa,KT-BINDAW-0418,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Charanchi,KT-CHARAN-0419,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Dan Musa,KT-DANMU-0420,Katsina,Nigeria,Zone 1,Zone 4,6,24
+DanDume,KT-DANDUM-0421,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Danja,KT-DANJA-0422,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Daura,KT-DAURA-0423,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Dutsi,KT-DUTSI-0424,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Dutsin-Ma,KT-DUTSIN-0425,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Faskari,KT-FASKAR-0426,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Funtua,KT-FUNTUA-0427,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Ingawa,KT-INGAWA-0428,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Jibia,KT-JIBIA-0429,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Kafur,KT-KAFUR-0430,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Kaita,KT-KAITA-0431,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Kankara,KT-KANKAR-0432,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Kankia,KT-KANKIA-0433,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Katsina,KT-KATSIN-0434,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Kurfi,KT-KURFI-0435,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Kusada,KT-KUSADA-0436,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Mai'Adua,KT-MAIAD-0437,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Malumfashi,KT-MALUMF-0438,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Mani,KT-MANI-0439,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Mashi,KT-MASHI-0440,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Matazu,KT-MATAZU-0441,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Musawa,KT-MUSAWA-0442,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Rimi,KT-RIMI-0443,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Sabuwa,KT-SABUWA-0444,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Safana,KT-SAFANA-0445,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Sandamu,KT-SANDAM-0446,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Zango,KT-ZANGO-0447,Katsina,Nigeria,Zone 1,Zone 4,6,24
+Aliero,KE-ALIERO-0448,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Arewa Dandi,KE-AREWA-0449,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Argungu,KE-ARGUNG-0450,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Augie,KE-AUGIE-0451,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Bagudo,KE-BAGUDO-0452,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Birnin Kebbi,KE-BIRNIN-0453,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Bunza,KE-BUNZA-0454,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Dandi,KE-DANDI-0455,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Danko-Wasagu,KE-DANKO-0456,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Fakai,KE-FAKAI-0457,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Gwandu,KE-GWANDU-0458,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Jega,KE-JEGA-0459,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Kalgo,KE-KALGO-0460,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Koko/Besse,KE-KOKOB-0461,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Maiyama,KE-MAIYAM-0462,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Ngaski,KE-NGASKI-0463,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Sakaba,KE-SAKABA-0464,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Shanga,KE-SHANGA-0465,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Suru,KE-SURU-0466,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Yauri,KE-YAURI-0467,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Zuru,KE-ZURU-0468,Kebbi,Nigeria,Zone 1,Zone 4,6,24
+Adavi,KO-ADAVI-0469,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Ajaokuta,KO-AJAOKU-0470,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Ankpa,KO-ANKPA-0471,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Bassa,KO-BASSA-0472,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Dekina,KO-DEKINA-0473,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Ibaji,KO-IBAJI-0474,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Idah,KO-IDAH-0475,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Igalamela Odolu,KO-IGALAM-0476,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Ijumu,KO-IJUMU-0477,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Kabba/Bunu,KO-KABBA-0478,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Kogi,KO-KOGI-0479,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Lokoja,KO-LOKOJA-0480,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Mopa-Muro,KO-MOPAM-0481,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Ofu,KO-OFU-0482,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Ogori/Magongo,KO-OGORI-0483,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Okehi,KO-OKEHI-0484,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Okene,KO-OKENE-0485,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Olamaboro,KO-OLAMAB-0486,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Omala,KO-OMALA-0487,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Yagba East,KO-YAGBA-0488,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Yagba West,KO-YAGBA-0489,Kogi,Nigeria,Zone 1,Zone 4,6,24
+Asa,KW-ASA-0490,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Baruten,KW-BARUTE-0491,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Edu,KW-EDU-0492,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Ekiti,KW-EKITI-0493,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Ifelodun,KW-IFELOD-0494,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Ilorin East,KW-ILORIN-0495,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Ilorin South,KW-ILORIN-0496,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Ilorin West,KW-ILORIN-0497,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Irepodun,KW-IREPOD-0498,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Isin,KW-ISIN-0499,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Kaiama,KW-KAIAMA-0500,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Moro,KW-MORO-0501,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Offa,KW-OFFA-0502,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Oke-Ero,KW-OKEER-0503,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Oyun,KW-OYUN-0504,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Pategi,KW-PATEGI-0505,Kwara,Nigeria,Zone 1,Zone 4,6,24
+Agege,LA-AGEGE-0506,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Ajeromi-Ifelodun,LA-AJEROM-0507,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Alimosho,LA-ALIMOS-0508,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Amuwo-Odofin,LA-AMUWO-0509,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Apapa,LA-APAPA-0510,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Badagry,LA-BADAGR-0511,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Epe,LA-EPE-0512,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Eti-Osa,LA-ETIOS-0513,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Ibeju-Lekki,LA-IBEJU-0514,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Ifako-Ijaiye,LA-IFAKO-0515,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Ikeja,LA-IKEJA-0516,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Ikorodu,LA-IKOROD-0517,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Kosofe,LA-KOSOFE-0518,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Lagos Island,LA-LAGOS-0519,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Lagos Mainland,LA-LAGOS-0520,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Mushin,LA-MUSHIN-0521,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Ojo,LA-OJO-0522,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Oshodi-Isolo,LA-OSHODI-0523,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Somolu,LA-SOMOLU-0524,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Surulere,LA-SURULE-0525,Lagos,Nigeria,Zone 1,Zone 4,6,24
+Akwanga,NA-AKWANG-0526,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Awe,NA-AWE-0527,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Doma,NA-DOMA-0528,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Karu,NA-KARU-0529,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Keana,NA-KEANA-0530,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Keffi,NA-KEFFI-0531,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Kokona,NA-KOKONA-0532,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Lafia,NA-LAFIA-0533,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Nasarawa,NA-NASARA-0534,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Nasarawa Egon,NA-NASARA-0535,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Obi,NA-OBI-0536,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Toto,NA-TOTO-0537,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Wamba,NA-WAMBA-0538,Nasarawa,Nigeria,Zone 1,Zone 4,6,24
+Agaie,NI-AGAIE-0539,Niger,Nigeria,Zone 1,Zone 4,6,24
+Agwara,NI-AGWARA-0540,Niger,Nigeria,Zone 1,Zone 4,6,24
+Bida,NI-BIDA-0541,Niger,Nigeria,Zone 1,Zone 4,6,24
+Borgu,NI-BORGU-0542,Niger,Nigeria,Zone 1,Zone 4,6,24
+Bosso,NI-BOSSO-0543,Niger,Nigeria,Zone 1,Zone 4,6,24
+Chanchaga,NI-CHANCH-0544,Niger,Nigeria,Zone 1,Zone 4,6,24
+Edati,NI-EDATI-0545,Niger,Nigeria,Zone 1,Zone 4,6,24
+Gbako,NI-GBAKO-0546,Niger,Nigeria,Zone 1,Zone 4,6,24
+Gurara,NI-GURARA-0547,Niger,Nigeria,Zone 1,Zone 4,6,24
+Katcha,NI-KATCHA-0548,Niger,Nigeria,Zone 1,Zone 4,6,24
+Kontagora,NI-KONTAG-0549,Niger,Nigeria,Zone 1,Zone 4,6,24
+Lapai,NI-LAPAI-0550,Niger,Nigeria,Zone 1,Zone 4,6,24
+Lavun,NI-LAVUN-0551,Niger,Nigeria,Zone 1,Zone 4,6,24
+Magama,NI-MAGAMA-0552,Niger,Nigeria,Zone 1,Zone 4,6,24
+Mariga,NI-MARIGA-0553,Niger,Nigeria,Zone 1,Zone 4,6,24
+Mashegu,NI-MASHEG-0554,Niger,Nigeria,Zone 1,Zone 4,6,24
+Mokwa,NI-MOKWA-0555,Niger,Nigeria,Zone 1,Zone 4,6,24
+Munya,NI-MUNYA-0556,Niger,Nigeria,Zone 1,Zone 4,6,24
+Paikoro,NI-PAIKOR-0557,Niger,Nigeria,Zone 1,Zone 4,6,24
+Rafi,NI-RAFI-0558,Niger,Nigeria,Zone 1,Zone 4,6,24
+Rijau,NI-RIJAU-0559,Niger,Nigeria,Zone 1,Zone 4,6,24
+Shiroro,NI-SHIROR-0560,Niger,Nigeria,Zone 1,Zone 4,6,24
+Suleja,NI-SULEJA-0561,Niger,Nigeria,Zone 1,Zone 4,6,24
+Tafa,NI-TAFA-0562,Niger,Nigeria,Zone 1,Zone 4,6,24
+Wushishi,NI-WUSHIS-0563,Niger,Nigeria,Zone 1,Zone 4,6,24
+Abeokuta North,OG-ABEOKU-0564,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Abeokuta South,OG-ABEOKU-0565,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Ado-Odo/Ota,OG-ADOOD-0566,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Ewekoro,OG-EWEKOR-0567,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Ifo,OG-IFO-0568,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Ijebu East,OG-IJEBU-0569,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Ijebu North,OG-IJEBU-0570,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Ijebu North East,OG-IJEBU-0571,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Ijebu Ode,OG-IJEBU-0572,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Ikenne,OG-IKENNE-0573,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Imeko Afon,OG-IMEKO-0574,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Ipokia,OG-IPOKIA-0575,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Obafemi Owode,OG-OBAFEM-0576,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Odeda,OG-ODEDA-0577,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Odogbolu,OG-ODOGBO-0578,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Ogun Waterside,OG-OGUNW-0579,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Remo North,OG-REMON-0580,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Shagamu,OG-SHAGAM-0581,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Yewa North,OG-YEWAN-0582,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Yewa South,OG-YEWAS-0583,Ogun,Nigeria,Zone 1,Zone 4,6,24
+Akoko North East,ON-AKOKO-0584,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Akoko North West,ON-AKOKO-0585,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Akoko South East,ON-AKOKO-0586,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Akoko South West,ON-AKOKO-0587,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Akure North,ON-AKURE-0588,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Akure South,ON-AKURE-0589,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Ese Odo,ON-ESEOD-0590,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Idanre,ON-IDANRE-0591,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Ifedore,ON-IFEDOR-0592,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Ilaje,ON-ILAJE-0593,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Ile Oluji/Okeigbo,ON-ILEOL-0594,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Irele,ON-IRELE-0595,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Odigbo,ON-ODIGBO-0596,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Okitipupa,ON-OKITIP-0597,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Ondo East,ON-ONDOE-0598,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Ondo West,ON-ONDOW-0599,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Ose,ON-OSE-0600,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Owo,ON-OWO-0601,Ondo,Nigeria,Zone 1,Zone 4,6,24
+Ayedaade,OS-AYEDAA-0602,Osun,Nigeria,Zone 1,Zone 4,6,24
+Aiyedire,OS-AIYEDI-0603,Osun,Nigeria,Zone 1,Zone 4,6,24
+Atakunmosa East,OS-ATAKUN-0604,Osun,Nigeria,Zone 1,Zone 4,6,24
+Atakunmosa West,OS-ATAKUN-0605,Osun,Nigeria,Zone 1,Zone 4,6,24
+Boluwaduro,OS-BOLUWA-0606,Osun,Nigeria,Zone 1,Zone 4,6,24
+Boripe,OS-BORIPE-0607,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ede North,OS-EDENO-0608,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ede South,OS-EDESO-0609,Osun,Nigeria,Zone 1,Zone 4,6,24
+Egbedore,OS-EGBEDO-0610,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ejigbo,OS-EJIGBO-0611,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ife Central,OS-IFECE-0612,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ife East,OS-IFEEA-0613,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ife North,OS-IFENO-0614,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ife South,OS-IFESO-0615,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ifedayo,OS-IFEDAY-0616,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ifelodun,OS-IFELOD-0617,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ila,OS-ILA-0618,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ilesa East,OS-ILESA-0619,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ilesa West,OS-ILESA-0620,Osun,Nigeria,Zone 1,Zone 4,6,24
+Irepodun,OS-IREPOD-0621,Osun,Nigeria,Zone 1,Zone 4,6,24
+Irewole,OS-IREWOL-0622,Osun,Nigeria,Zone 1,Zone 4,6,24
+Isokan,OS-ISOKAN-0623,Osun,Nigeria,Zone 1,Zone 4,6,24
+Iwo,OS-IWO-0624,Osun,Nigeria,Zone 1,Zone 4,6,24
+Obokun,OS-OBOKUN-0625,Osun,Nigeria,Zone 1,Zone 4,6,24
+Odo-Otin,OS-ODOOT-0626,Osun,Nigeria,Zone 1,Zone 4,6,24
+Ola-Oluwa,OS-OLAOL-0627,Osun,Nigeria,Zone 1,Zone 4,6,24
+Olorunda,OS-OLORUN-0628,Osun,Nigeria,Zone 1,Zone 4,6,24
+Oriade,OS-ORIADE-0629,Osun,Nigeria,Zone 1,Zone 4,6,24
+Orolu,OS-OROLU-0630,Osun,Nigeria,Zone 1,Zone 4,6,24
+Osogbo,OS-OSOGBO-0631,Osun,Nigeria,Zone 1,Zone 4,6,24
+Afijio,OY-AFIJIO-0632,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Akinyele,OY-AKINYE-0633,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Atiba,OY-ATIBA-0634,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Atisbo,OY-ATISBO-0635,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Egbeda,OY-EGBEDA-0636,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ibadan North,OY-IBADAN-0637,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ibadan North East,OY-IBADAN-0638,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ibadan North West,OY-IBADAN-0639,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ibadan South East,OY-IBADAN-0640,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ibadan South West,OY-IBADAN-0641,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ibarapa Central,OY-IBARAP-0642,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ibarapa East,OY-IBARAP-0643,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ibarapa North,OY-IBARAP-0644,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ido,OY-IDO-0645,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Irepo,OY-IREPO-0646,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Iseyin,OY-ISEYIN-0647,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Itesiwaju,OY-ITESIW-0648,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Iwajowa,OY-IWAJOW-0649,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Kajola,OY-KAJOLA-0650,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Lagelu,OY-LAGELU-0651,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ogbomosho North,OY-OGBOMO-0652,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ogbomosho South,OY-OGBOMO-0653,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ogo Oluwa,OY-OGOOL-0654,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Olorunsogo,OY-OLORUN-0655,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Oluyole,OY-OLUYOL-0656,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ona Ara,OY-ONAAR-0657,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Oorelope,OY-OORELO-0658,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Ori Ire,OY-ORIIR-0659,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Oyo East,OY-OYOEA-0660,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Oyo West,OY-OYOWE-0661,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Saki East,OY-SAKIE-0662,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Saki West,OY-SAKIW-0663,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Surulere,OY-SURULE-0664,Oyo,Nigeria,Zone 1,Zone 4,6,24
+Barkin Ladi,PL-BARKIN-0665,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Bassa,PL-BASSA-0666,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Bokkos,PL-BOKKOS-0667,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Jos East,PL-JOSEA-0668,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Jos North,PL-JOSNO-0669,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Jos South,PL-JOSSO-0670,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Kanam,PL-KANAM-0671,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Kanke,PL-KANKE-0672,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Langtang North,PL-LANGTA-0673,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Langtang South,PL-LANGTA-0674,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Mangu,PL-MANGU-0675,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Mikang,PL-MIKANG-0676,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Pankshin,PL-PANKSH-0677,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Qua'an Pan,PL-QUAAN-0678,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Riyom,PL-RIYOM-0679,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Shendam,PL-SHENDA-0680,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Wase,PL-WASE-0681,Plateau,Nigeria,Zone 1,Zone 4,6,24
+Abua-Odual,RI-ABUAO-0682,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Ahoada East,RI-AHOADA-0683,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Ahoada West,RI-AHOADA-0684,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Akuku-Toru,RI-AKUKU-0685,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Andoni,RI-ANDONI-0686,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Asari-Toru,RI-ASARI-0687,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Bonny,RI-BONNY-0688,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Degema,RI-DEGEMA-0689,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Eleme,RI-ELEME-0690,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Emohua,RI-EMOHUA-0691,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Etche,RI-ETCHE-0692,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Gokana,RI-GOKANA-0693,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Ikwerre,RI-IKWERR-0694,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Khana,RI-KHANA-0695,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Obio/Akpor,RI-OBIOA-0696,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Ogba/Egbema/Ndoni,RI-OGBAE-0697,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Ogu/Bolo,RI-OGUBO-0698,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Okrika,RI-OKRIKA-0699,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Omuma,RI-OMUMA-0700,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Opobo/Nkoro,RI-OPOBO-0701,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Oyigbo,RI-OYIGBO-0702,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Port Harcourt,RI-PORTH-0703,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Tai,RI-TAI-0704,Rivers,Nigeria,Zone 1,Zone 4,6,24
+Binji,SO-BINJI-0705,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Bodinga,SO-BODING-0706,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Dange/Shuni,SO-DANGE-0707,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Gada,SO-GADA-0708,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Goronyo,SO-GORONY-0709,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Gudu,SO-GUDU-0710,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Gwadabawa,SO-GWADAB-0711,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Illela,SO-ILLELA-0712,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Isa,SO-ISA-0713,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Kware,SO-KWARE-0714,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Rabah,SO-RABAH-0715,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Sabon Birni,SO-SABON-0716,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Shagari,SO-SHAGAR-0717,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Silame,SO-SILAME-0718,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Sokoto North,SO-SOKOTO-0719,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Sokoto South,SO-SOKOTO-0720,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Tambuwal,SO-TAMBUW-0721,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Tangaza,SO-TANGAZ-0722,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Tureta,SO-TURETA-0723,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Wamako,SO-WAMAKO-0724,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Wurno,SO-WURNO-0725,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Yabo,SO-YABO-0726,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Kebbe,SO-KEBBE-0727,Sokoto,Nigeria,Zone 1,Zone 4,6,24
+Ardo Kola,TA-ARDOK-0728,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Bali,TA-BALI-0729,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Donga,TA-DONGA-0730,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Gashaka,TA-GASHAK-0731,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Gassol,TA-GASSOL-0732,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Ibi,TA-IBI-0733,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Jalingo,TA-JALING-0734,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Karim Lamido,TA-KARIM-0735,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Kurmi,TA-KURMI-0736,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Lau,TA-LAU-0737,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Sardauna,TA-SARDAU-0738,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Takum,TA-TAKUM-0739,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Ussa,TA-USSA-0740,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Wukari,TA-WUKARI-0741,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Yorro,TA-YORRO-0742,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Zing,TA-ZING-0743,Taraba,Nigeria,Zone 1,Zone 4,6,24
+Bade,YO-BADE-0744,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Bursari,YO-BURSAR-0745,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Damaturu,YO-DAMATU-0746,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Fika,YO-FIKA-0747,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Fune,YO-FUNE-0748,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Geidam,YO-GEIDAM-0749,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Gujba,YO-GUJBA-0750,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Gulani,YO-GULANI-0751,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Jakusko,YO-JAKUSK-0752,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Karasuwa,YO-KARASU-0753,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Machina,YO-MACHIN-0754,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Nangere,YO-NANGER-0755,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Nguru,YO-NGURU-0756,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Potiskum,YO-POTISK-0757,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Tarmuwa,YO-TARMUW-0758,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Yunusari,YO-YUNUSA-0759,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Yusufari,YO-YUSUFA-0760,Yobe,Nigeria,Zone 1,Zone 4,6,24
+Anka,ZA-ANKA-0761,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Bakura,ZA-BAKURA-0762,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Birnin Magaji/Kiyaw,ZA-BIRNIN-0763,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Bukkuyum,ZA-BUKKUY-0764,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Bungudu,ZA-BUNGUD-0765,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Gummi,ZA-GUMMI-0766,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Gusau,ZA-GUSAU-0767,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Kaura Namoda,ZA-KAURA-0768,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Maradun,ZA-MARADU-0769,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Maru,ZA-MARU-0770,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Shinkafi,ZA-SHINKA-0771,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Talata Mafara,ZA-TALATA-0772,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Tsafe,ZA-TSAFE-0773,Zamfara,Nigeria,Zone 1,Zone 4,6,24
+Zurmi,ZA-ZURMI-0774,Zamfara,Nigeria,Zone 1,Zone 4,6,24

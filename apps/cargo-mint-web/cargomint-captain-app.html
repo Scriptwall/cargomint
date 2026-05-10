@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CargoMint 2.0 — Captain App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: #000; }
+
+:root {
+  /* Deep blacks and charcoals */
+  --black:        #000000;
+  --bg-base:      #0A0A0A;
+  --bg-surface:   #111111;
+  --bg-panel:     #161616;
+  --bg-raised:    #1C1C1C;
+  --bg-hover:     #222222;
+  --bg-active:    #282828;
+  --bg-card:      #141414;
+
+  /* Teal/green accent */
+  --teal:         #00D4AA;
+  --teal-dim:     rgba(0,212,170,0.10);
+  --teal-border:  rgba(0,212,170,0.25);
+  --teal-glow:    rgba(0,212,170,0.15);
+  --green:        #22D46A;
+  --green-dim:    rgba(34,212,106,0.10);
+  --red:          #FF3B55;
+  --red-dim:      rgba(255,59,85,0.10);
+  --amber:        #FFB020;
+  --amber-dim:    rgba(255,176,32,0.10);
+  --blue:         #3D9EF5;
+  --blue-dim:     rgba(61,158,245,0.10);
+  --purple:       #9B6EF5;
+
+  /* Text */
+  --text-primary:   #F5F5F5;
+  --text-secondary: #888888;
+  --text-tertiary:  #444444;
+  --text-teal:      #00D4AA;
+  --text-green:     #22D46A;
+  --text-red:       #FF3B55;
+  --text-amber:     #FFB020;
+
+  /* Borders */
+  --border:        rgba(255,255,255,0.06);
+  --border-med:    rgba(255,255,255,0.10);
+  --border-strong: rgba(255,255,255,0.18);
+
+  --font: 'Geist', system-ui, sans-serif;
+  --mono: 'Geist Mono', monospace;
+
+  /* Mobile phone frame */
+  --phone-w: 390px;
+  --phone-h: 844px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+}
+
+/* ── Page wrapper — centered phone ── */
+body {
+  font-family: var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #050505;
+  padding: 20px;
+}
+
+.page-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* ── Phone frame ── */
+.phone-frame {
+  width: var(--phone-w);
+  height: var(--phone-h);
+  background: var(--bg-base);
+  border-radius: 44px;
+  border: 1.5px solid rgba(255,255,255,0.10);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.8),
+    0 40px 80px rgba(0,0,0,.9),
+    0 0 60px rgba(0,212,170,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Status bar ── */
+.status-bar {
+  height: 44px;
+  background: var(--bg-base);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+.sb-time { font-size: 15px; font-weight: 600; font-family: var(--mono); color: var(--text-primary); }
+.sb-icons { display: flex; align-items: center; gap: 6px; }
+.sb-icons svg { width: 14px; height: 14px; fill: var(--text-primary); }
+
+/* ── App header ── */
+.app-header {
+  background: var(--bg-surface);
+  border-bottom: 0.5px solid var(--border);
+  padding: 10px 20px 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.app-logo { display: flex; align-items: center; gap: 8px; }
+.app-logo-icon {
+  width: 30px; height: 30px; border-radius: 9px;
+  background: var(--teal-dim); border: 0.5px solid var(--teal-border);
+  display: flex; align-items: center; justify-content: center;
+}
+.app-logo-icon svg { width: 15px; height: 15px; fill: var(--teal); }
+.app-logo-name { font-size: 15px; font-weight: 700; color: var(--text-primary); letter-spacing: -.3px; }
+.app-logo-role { font-size: 10px; color: var(--text-tertiary); font-family: var(--mono); margin-top: -1px; }
+.header-right { display: flex; align-items: center; gap: 8px; }
+.notif-btn {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: var(--bg-raised); border: 0.5px solid var(--border-med);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; position: relative;
+}
+.notif-btn svg { width: 16px; height: 16px; fill: var(--text-secondary); }
+.notif-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); position: absolute; top: 6px; right: 6px; border: 1.5px solid var(--bg-surface); }
+.status-pill {
+  display: flex; align-items: center; gap: 5px;
+  background: var(--teal-dim); border: 0.5px solid var(--teal-border);
+  border-radius: 20px; padding: 4px 10px; cursor: pointer;
+}
+.status-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 1.8s infinite; }
+.status-pill-label { font-size: 10.5px; font-weight: 600; color: var(--teal); font-family: var(--mono); }
+
+/* ── Scroll content ── */
+.scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--bg-base);
+  -webkit-overflow-scrolling: touch;
+}
+.scroll-content::-webkit-scrollbar { display: none; }
+
+/* ── Bottom nav ── */
+.bottom-nav {
+  height: 70px;
+  background: var(--bg-surface);
+  border-top: 0.5px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  padding-top: 8px;
+  flex-shrink: 0;
+}
+.nav-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: opacity .1s;
+}
+.nav-tab:active { opacity: .7; }
+.nav-tab svg { width: 22px; height: 22px; }
+.nav-tab-label { font-size: 9.5px; font-weight: 500; letter-spacing: .2px; }
+.nav-tab.active svg { fill: var(--teal); }
+.nav-tab.active .nav-tab-label { color: var(--teal); }
+.nav-tab:not(.active) svg { fill: var(--text-tertiary); }
+.nav-tab:not(.active) .nav-tab-label { color: var(--text-tertiary); }
+
+/* ── Section padding ── */
+.pad { padding: 0 16px; }
+.pad-t { padding-top: 16px; }
+.pad-b { padding-bottom: 16px; }
+
+/* ── Section title ── */
+.sec-ttl {
+  font-size: 10px; font-weight: 700; color: var(--text-tertiary);
+  text-transform: uppercase; letter-spacing: 1px;
+  padding: 14px 16px 8px;
+}
+
+/* ── Trip banner ── */
+.trip-banner {
+  margin: 14px 16px 0;
+  background: var(--bg-panel);
+  border: 0.5px solid var(--teal-border);
+  border-radius: var(--r-xl);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.trip-banner::before {
+  content: '';
+  position: absolute; top: -20px; right: -20px;
+  width: 100px; height: 100px; border-radius: 50%;
+  background: var(--teal-glow); pointer-events: none;
+}
+.trip-id { font-size: 10px; color: var(--teal); font-family: var(--mono); font-weight: 600; letter-spacing: .5px; margin-bottom: 3px; }
+.trip-route { font-size: 18px; font-weight: 700; color: var(--text-primary); letter-spacing: -.3px; margin-bottom: 6px; }
+.trip-meta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.trip-meta-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-secondary); }
+.trip-meta-item svg { width: 11px; height: 11px; fill: var(--text-tertiary); }
+.trip-progress { margin-top: 12px; }
+.trip-prog-row { display: flex; justify-content: space-between; font-size: 10.5px; margin-bottom: 5px; }
+.trip-prog-lbl { color: var(--text-secondary); font-family: var(--mono); }
+.trip-prog-val { color: var(--teal); font-family: var(--mono); font-weight: 600; }
+.prog-track { height: 5px; background: var(--bg-raised); border-radius: 3px; overflow: hidden; }
+.prog-fill  { height: 100%; border-radius: 3px; background: var(--teal); transition: width .4s; }
+
+/* ── Stats row ── */
+.stats-row {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 8px; padding: 12px 16px;
+}
+.stat-card {
+  background: var(--bg-panel);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 12px 10px; text-align: center;
+}
+.stat-val { font-size: 20px; font-weight: 700; font-family: var(--mono); color: var(--text-primary); }
+.stat-lbl { font-size: 9.5px; color: var(--text-tertiary); margin-top: 2px; text-transform: uppercase; letter-spacing: .5px; }
+.stat-card.accent { border-color: var(--teal-border); background: var(--teal-dim); }
+.stat-card.accent .stat-val { color: var(--teal); }
+
+/* ── Action buttons ── */
+.action-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; padding: 0 16px; margin-bottom: 4px;
+}
+.action-btn {
+  background: var(--bg-panel);
+  border: 0.5px solid var(--border-med);
+  border-radius: var(--r-xl);
+  padding: 16px 14px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  cursor: pointer; transition: background .1s, border-color .1s;
+  text-align: left;
+}
+.action-btn:active { background: var(--bg-hover); }
+.action-btn.primary { background: var(--teal-dim); border-color: var(--teal-border); }
+.action-btn.primary:active { background: rgba(0,212,170,.18); }
+.action-btn-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.action-btn-icon svg { width: 18px; height: 18px; }
+.action-btn-label { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.action-btn-sub   { font-size: 10px; color: var(--text-secondary); margin-top: -4px; }
+.action-btn.primary .action-btn-label { color: var(--teal); }
+
+/* ── Shipment list items ── */
+.ship-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px;
+  border-bottom: 0.5px solid var(--border);
+  cursor: pointer; transition: background .1s;
+}
+.ship-item:active { background: var(--bg-hover); }
+.ship-item:last-child { border-bottom: none; }
+.ship-num {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--bg-raised); border: 0.5px solid var(--border-med);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; font-family: var(--mono);
+  color: var(--text-secondary); flex-shrink: 0;
+}
+.ship-num.delivered { background: var(--green-dim); border-color: rgba(34,212,106,.25); color: var(--green); }
+.ship-num.active    { background: var(--teal-dim); border-color: var(--teal-border); color: var(--teal); }
+.ship-info { flex: 1; min-width: 0; }
+.ship-wb   { font-size: 12px; font-family: var(--mono); font-weight: 500; color: var(--text-primary); }
+.ship-name { font-size: 11.5px; color: var(--text-secondary); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ship-addr { font-size: 10.5px; color: var(--text-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ship-right { text-align: right; flex-shrink: 0; }
+.ship-badge { font-size: 9.5px; font-weight: 600; padding: 3px 8px; border-radius: 6px; font-family: var(--mono); display: inline-block; }
+.sb-delivered { background: var(--green-dim); color: var(--green); border: 0.5px solid rgba(34,212,106,.25); }
+.sb-pending   { background: var(--amber-dim);  color: var(--amber); border: 0.5px solid rgba(255,176,32,.25); }
+.sb-active    { background: var(--teal-dim);   color: var(--teal);  border: 0.5px solid var(--teal-border); }
+.sb-failed    { background: var(--red-dim);    color: var(--red);   border: 0.5px solid rgba(255,59,85,.25); }
+.ship-weight  { font-size: 10px; color: var(--text-tertiary); font-family: var(--mono); margin-top: 3px; }
+
+/* ── Scanner page ── */
+.scanner-view {
+  background: #000;
+  border-radius: var(--r-lg);
+  margin: 14px 16px;
+  height: 220px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  border: 1px solid var(--border-med);
+}
+.scanner-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,170,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,170,.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.scanner-corners {
+  position: absolute; inset: 24px;
+  border: 2px solid var(--teal);
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,212,170,.2), inset 0 0 20px rgba(0,212,170,.05);
+}
+.scanner-corners::before {
+  content: '';
+  position: absolute;
+  left: -2px; right: -2px;
+  height: 2px;
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal);
+  animation: scan 2.5s linear infinite;
+}
+@keyframes scan { 0%{top:0} 100%{top:calc(100% - 2px)} }
+.scanner-label {
+  position: absolute; bottom: 14px;
+  font-size: 11px; font-family: var(--mono); color: var(--teal);
+  letter-spacing: .5px; font-weight: 600;
+}
+.scanner-icon {
+  width: 40px; height: 40px;
+  opacity: .2;
+}
+.scanner-icon svg { width: 40px; height: 40px; fill: var(--teal); }
+
+/* ── Recent scans ── */
+.scan-item {
+  display: flex; align-items: center; gap: 11px;
+  padding: 11px 16px; border-bottom: 0.5px solid var(--border);
+}
+.scan-item:last-child { border-bottom: none; }
+.scan-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.scan-info { flex: 1; min-width: 0; }
+.scan-wb   { font-size: 12px; font-family: var(--mono); color: var(--text-primary); font-weight: 500; }
+.scan-detail { font-size: 10.5px; color: var(--text-secondary); margin-top: 1px; }
+.scan-time { font-size: 10px; color: var(--text-tertiary); font-family: var(--mono); }
+
+/* ── Delivery handover ── */
+.handover-card {
+  margin: 14px 16px 0;
+  background: var(--bg-panel);
+  border: 0.5px solid var(--border-med);
+  border-radius: var(--r-xl);
+  padding: 16px;
+}
+.handover-ttl { font-size: 10px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 10px; font-family: var(--mono); }
+.handover-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 0.5px solid var(--border); font-size: 12px; }
+.handover-row:last-of-type { border-bottom: none; }
+.handover-key { color: var(--text-secondary); }
+.handover-val { font-family: var(--mono); color: var(--text-primary); font-weight: 500; }
+
+/* ── OTP box ── */
+.otp-row { display: flex; gap: 8px; justify-content: center; margin: 14px 0; }
+.otp-box {
+  width: 46px; height: 54px;
+  background: var(--bg-raised); border: 1.5px solid var(--border-med);
+  border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 700; font-family: var(--mono);
+  color: var(--text-primary); cursor: pointer;
+  transition: border-color .15s;
+}
+.otp-box.filled { border-color: var(--teal); color: var(--teal); background: var(--teal-dim); }
+
+/* ── Signature pad ── */
+.sig-pad {
+  margin: 0 16px;
+  background: var(--bg-panel);
+  border: 1px dashed var(--border-med);
+  border-radius: var(--r-lg);
+  height: 110px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 6px; cursor: pointer;
+}
+.sig-pad svg { width: 24px; height: 24px; fill: var(--text-tertiary); }
+.sig-pad-lbl { font-size: 11px; color: var(--text-tertiary); font-family: var(--mono); }
+
+/* ── Big CTA buttons ── */
+.cta-btn {
+  margin: 12px 16px 0;
+  width: calc(100% - 32px);
+  height: 52px;
+  border-radius: var(--r-xl);
+  border: none;
+  font-size: 14px; font-weight: 700; font-family: var(--font);
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: opacity .1s, transform .1s;
+  letter-spacing: -.1px;
+}
+.cta-btn:active { opacity: .85; transform: scale(.98); }
+.cta-solid { background: var(--teal); color: #000; }
+.cta-outline { background: transparent; border: 1.5px solid var(--border-strong) !important; color: var(--text-secondary); }
+.cta-danger  { background: var(--red-dim); border: 1.5px solid rgba(255,59,85,.3) !important; color: var(--red); }
+.cta-amber   { background: var(--amber-dim); border: 1.5px solid rgba(255,176,32,.3) !important; color: var(--amber); }
+
+/* ── Map placeholder ── */
+.map-card {
+  margin: 14px 16px 0;
+  background: var(--bg-panel);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-xl);
+  height: 180px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.map-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,170,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,170,.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.map-roads {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(35deg, transparent 40%, rgba(0,212,170,.08) 40.5%, rgba(0,212,170,.08) 41%, transparent 41.5%),
+    linear-gradient(-35deg, transparent 55%, rgba(0,212,170,.06) 55.5%, rgba(0,212,170,.06) 56%, transparent 56.5%),
+    linear-gradient(90deg, transparent 30%, rgba(255,255,255,.03) 30.5%, rgba(255,255,255,.03) 31%, transparent 31.5%);
+}
+.map-pin {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--teal); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 8px rgba(0,212,170,.15), 0 0 20px rgba(0,212,170,.3);
+  position: relative; z-index: 1;
+}
+.map-pin svg { width: 18px; height: 18px; fill: #000; }
+.map-label {
+  position: absolute; bottom: 12px; left: 16px; right: 16px;
+  background: rgba(0,0,0,.7); backdrop-filter: blur(8px);
+  border: 0.5px solid var(--border-med);
+  border-radius: var(--r-md); padding: 8px 12px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.map-dest { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.map-eta  { font-size: 10.5px; color: var(--teal); font-family: var(--mono); font-weight: 600; }
+
+/* ── Fuel log ── */
+.fuel-input-row { display: flex; gap: 8px; padding: 0 16px; margin-bottom: 4px; }
+.fuel-input { flex: 1; height: 44px; padding: 0 14px; background: var(--bg-raised); border: 0.5px solid var(--border-med); border-radius: var(--r-lg); color: var(--text-primary); font-size: 14px; font-family: var(--mono); outline: none; }
+.fuel-input:focus { border-color: var(--teal); }
+.fuel-input::placeholder { color: var(--text-tertiary); }
+.fuel-btn { height: 44px; padding: 0 18px; background: var(--teal-dim); border: 0.5px solid var(--teal-border); border-radius: var(--r-lg); color: var(--teal); font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.fuel-btn:active { background: rgba(0,212,170,.18); }
+
+/* ── Profile page ── */
+.profile-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--teal-dim); border: 2px solid var(--teal-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; font-weight: 700; font-family: var(--mono);
+  color: var(--teal); margin: 0 auto 10px;
+}
+.profile-name  { font-size: 18px; font-weight: 700; text-align: center; color: var(--text-primary); }
+.profile-role  { font-size: 11px; text-align: center; color: var(--text-tertiary); font-family: var(--mono); margin-top: 2px; }
+.profile-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; padding: 14px 16px 0; }
+
+/* ── Settings rows ── */
+.setting-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; border-bottom: 0.5px solid var(--border);
+  cursor: pointer;
+}
+.setting-row:active { background: var(--bg-hover); }
+.setting-icon { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.setting-icon svg { width: 15px; height: 15px; }
+.setting-label { flex: 1; font-size: 13px; font-weight: 500; color: var(--text-primary); }
+.setting-val   { font-size: 11px; color: var(--text-tertiary); font-family: var(--mono); }
+.setting-chevron { color: var(--text-tertiary); font-size: 12px; }
+.toggle { width: 40px; height: 22px; border-radius: 11px; position: relative; cursor: pointer; flex-shrink: 0; transition: background .2s; }
+.toggle-on  { background: var(--teal); }
+.toggle-off { background: var(--bg-raised); border: 1px solid var(--border-med); }
+.toggle-knob { width: 16px; height: 16px; border-radius: 50%; background: #fff; position: absolute; top: 3px; transition: left .2s; }
+.toggle-on  .toggle-knob { left: 21px; }
+.toggle-off .toggle-knob { left: 3px; }
+
+/* ── Animations ── */
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.fade-in { animation: fadeIn .2s ease; }
+
+/* ── Page switcher labels ── */
+.page-nav {
+  display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+  margin-top: 12px;
+}
+.page-nav-btn {
+  padding: 6px 14px; border-radius: 20px;
+  border: 0.5px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.5);
+  font-size: 11px; font-family: var(--mono); cursor: pointer;
+  transition: all .15s;
+}
+.page-nav-btn:hover { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); }
+.page-nav-btn.active { background: var(--teal-dim); border-color: var(--teal-border); color: var(--teal); }
+</style>
+</head>
+<body>
+
+<div class="page-bg">
+
+  <!-- Phone -->
+  <div class="phone-frame" id="phone">
+
+    <!-- Status bar -->
+    <div class="status-bar">
+      <div class="sb-time">9:41</div>
+      <div class="sb-icons">
+        <svg viewBox="0 0 16 16"><path d="M1 11h2v2H1zm3-3h2v5H4zm3-3h2v8H7zm3-5h2v13h-2z"/></svg>
+        <svg viewBox="0 0 16 16"><path d="M8 3a5.5 5.5 0 015.5 5.5h1.5a7 7 0 00-14 0h1.5A5.5 5.5 0 018 3zm0 3a2.5 2.5 0 012.5 2.5H12a4 4 0 00-8 0h1.5A2.5 2.5 0 018 6zm0 3a.5.5 0 100 1 .5.5 0 000-1z"/></svg>
+        <svg viewBox="0 0 16 16"><path d="M2 5h10a2 2 0 012 2v3H0V7a2 2 0 012-2zm11 5H0v1a1 1 0 001 1h10a1 1 0 001-1v-1zm1.5-3.5a.5.5 0 01.5.5v2a.5.5 0 01-.5.5V6.5z"/></svg>
+      </div>
+    </div>
+
+    <!-- App header -->
+    <div class="app-header">
+      <div class="app-logo">
+        <div class="app-logo-icon">
+          <svg viewBox="0 0 16 16"><path d="M1 3.5A1.5 1.5 0 012.5 2h11A1.5 1.5 0 0115 3.5v2A1.5 1.5 0 0113.5 7h-11A1.5 1.5 0 011 5.5v-2zm0 6A1.5 1.5 0 012.5 8h11A1.5 1.5 0 0115 9.5v3A1.5 1.5 0 0113.5 14h-11A1.5 1.5 0 011 12.5v-3z"/></svg>
+        </div>
+        <div>
+          <div class="app-logo-name">CargoMint</div>
+          <div class="app-logo-role">captain · swiftlog ng</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="notif-btn">
+          <svg viewBox="0 0 16 16"><path d="M8 1a5 5 0 00-5 5v3l-1.5 2h13L13 9V6a5 5 0 00-5-5zm0 14a2 2 0 002-2H6a2 2 0 002 2z"/></svg>
+          <div class="notif-dot"></div>
+        </div>
+        <div class="status-pill" onclick="toast('Status: Online')">
+          <div class="status-pill-dot"></div>
+          <div class="status-pill-label">ONLINE</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll content -->
+    <div class="scroll-content fade-in" id="screen-content">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- Bottom nav -->
+    <div class="bottom-nav">
+      <div class="nav-tab active" data-screen="trip" onclick="switchScreen('trip')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 4.5v11L12 22 4 17.5v-11L12 2zm0 2.3L5.5 8v8L12 19.7 18.5 16V8L12 4.3z"/></svg>
+        <div class="nav-tab-label">Trip</div>
+      </div>
+      <div class="nav-tab" data-screen="scanner" onclick="switchScreen('scanner')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 4h4V2H2v2zm0 2h2V4H2v2zm0 2h2V6H2v2zm14-6h4v4h-2V4h-2V2zm2 4h2V4h-2v2zm0 2h2V6h-2v2zM2 20h4v2H2v-2zm0-2h2v2H2v-2zm16 2h4v2h-4v-2zm2-2h2v2h-2v-2zM5 7h14v10H5V7zm2 2v6h10V9H7z"/></svg>
+        <div class="nav-tab-label">Scan</div>
+      </div>
+      <div class="nav-tab" data-screen="delivery" onclick="switchScreen('delivery')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+        <div class="nav-tab-label">Deliver</div>
+      </div>
+      <div class="nav-tab" data-screen="profile" onclick="switchScreen('profile')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/></svg>
+        <div class="nav-tab-label">Profile</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Page nav labels below phone -->
+  <div class="page-nav">
+    <div class="page-nav-btn active" onclick="switchScreen('trip')">Active Trip</div>
+    <div class="page-nav-btn" onclick="switchScreen('scanner')">Scanner</div>
+    <div class="page-nav-btn" onclick="switchScreen('delivery')">Delivery & Handover</div>
+    <div class="page-nav-btn" onclick="switchScreen('profile')">Profile</div>
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div id="toast" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(8px);background:#1C1C1C;border:0.5px solid rgba(0,212,170,.3);color:#00D4AA;font-size:12px;font-family:'Geist Mono',monospace;padding:10px 18px;border-radius:10px;opacity:0;transition:opacity .2s,transform .2s;z-index:999;pointer-events:none;white-space:nowrap"></div>
+
+<script>
+const SCREENS = {
+
+  trip: () => `
+    <!-- Trip banner -->
+    <div class="trip-banner">
+      <div class="trip-id">ACTIVE TRIP · MAN-0085</div>
+      <div class="trip-route">Lagos VI → Abuja</div>
+      <div class="trip-meta-row">
+        <div class="trip-meta-item">
+          <svg viewBox="0 0 16 16"><path d="M1 6l2-3h10l2 3v5H1V6zm3.5 4a1.5 1.5 0 103 0 1.5 1.5 0 00-3 0zm5 0a1.5 1.5 0 103 0 1.5 1.5 0 00-3 0z" fill="currentColor"/></svg>
+          LAS-441-KJ · Sprinter Van
+        </div>
+        <div class="trip-meta-item">
+          <svg viewBox="0 0 16 16"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.5 3.5v4.25l3 1.75-.75 1.3L7.5 9.5V4.5h1z" fill="currentColor"/></svg>
+          Depart 08:00 · ETA 14:30
+        </div>
+      </div>
+      <div class="trip-progress">
+        <div class="trip-prog-row">
+          <span class="trip-prog-lbl">Deliveries progress</span>
+          <span class="trip-prog-val">31 / 52 done</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" style="width:60%"></div></div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card accent"><div class="stat-val">52</div><div class="stat-lbl">Total</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--green)">31</div><div class="stat-lbl">Done</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--amber)">21</div><div class="stat-lbl">Pending</div></div>
+    </div>
+
+    <!-- Map -->
+    <div class="map-card">
+      <div class="map-bg"></div>
+      <div class="map-roads"></div>
+      <div class="map-pin">
+        <svg viewBox="0 0 16 16"><path d="M8 1a4 4 0 00-4 4c0 3 4 8 4 8s4-5 4-8a4 4 0 00-4-4zm0 5.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/></svg>
+      </div>
+      <div class="map-label">
+        <div>
+          <div class="map-dest">Next: 14 Maitama Close, Abuja</div>
+          <div style="font-size:10px;color:var(--text-tertiary);font-family:var(--mono);margin-top:1px">SL-2026-00847 · Amina Bello</div>
+        </div>
+        <div class="map-eta">ETA 12 min</div>
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="sec-ttl" style="padding-top:14px">Quick actions</div>
+    <div class="action-grid">
+      <div class="action-btn primary" onclick="switchScreen('scanner')">
+        <div class="action-btn-icon" style="background:rgba(0,212,170,.15)">
+          <svg viewBox="0 0 24 24" fill="var(--teal)"><path d="M2 4h4V2H2v2zm0 2h2V4H2v2zm14-6h4v4h-2V4h-2V2zm2 4h2V4h-2v2zM5 7h14v10H5V7zm2 2v6h10V9H7z"/></svg>
+        </div>
+        <div class="action-btn-label">Scan Package</div>
+        <div class="action-btn-sub">Confirm pickup/drop</div>
+      </div>
+      <div class="action-btn" onclick="switchScreen('delivery')">
+        <div class="action-btn-icon" style="background:var(--green-dim)">
+          <svg viewBox="0 0 24 24" fill="var(--green)"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="var(--green)" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <div class="action-btn-label">Deliver</div>
+        <div class="action-btn-sub">OTP + signature</div>
+      </div>
+      <div class="action-btn" onclick="toast('Google Maps opening…')">
+        <div class="action-btn-icon" style="background:var(--blue-dim)">
+          <svg viewBox="0 0 24 24" fill="var(--blue)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="action-btn-label">Navigate</div>
+        <div class="action-btn-sub">Open in Maps</div>
+      </div>
+      <div class="action-btn" onclick="toast('Calling dispatch…')">
+        <div class="action-btn-icon" style="background:var(--amber-dim)">
+          <svg viewBox="0 0 24 24" fill="var(--amber)"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        </div>
+        <div class="action-btn-label">Call Dispatch</div>
+        <div class="action-btn-sub">Hub manager</div>
+      </div>
+    </div>
+
+    <!-- Manifest list -->
+    <div class="sec-ttl">Manifest — Pending deliveries</div>
+    <div style="background:var(--bg-panel);border-radius:var(--r-xl);margin:0 16px 16px;border:0.5px solid var(--border);overflow:hidden">
+      ${[
+        ['01','SL-2026-00847','Amina Bello','14 Maitama Close, Abuja','2.5kg','active'],
+        ['02','SL-2026-00849','Chidi Nwosu','22 Garki District, Abuja','1.8kg','pending'],
+        ['03','SL-2026-00851','Grace Eze','7 Asokoro Ave, Abuja','4.0kg','pending'],
+        ['04','SL-2026-00854','Musa Kano','Wuse Zone 5, Abuja','0.9kg','pending'],
+        ['05','SL-2026-00820','Bola Adesanya','Delivered','—','delivered'],
+      ].map(([n,wb,name,addr,wt,st])=>`
+        <div class="ship-item" onclick="toast('Opening '+String.raw\`${wb}\`)">
+          <div class="ship-num ${st}">${n}</div>
+          <div class="ship-info">
+            <div class="ship-wb">${wb}</div>
+            <div class="ship-name">${name}</div>
+            <div class="ship-addr">${addr}</div>
+          </div>
+          <div class="ship-right">
+            <div class="ship-badge ${st==='delivered'?'sb-delivered':st==='active'?'sb-active':'sb-pending'}">${st==='delivered'?'Done':st==='active'?'NEXT':'Pending'}</div>
+            <div class="ship-weight">${wt}</div>
+          </div>
+        </div>`).join('')}
+    </div>
+
+    <!-- Fuel log -->
+    <div class="sec-ttl">Log fuel cost</div>
+    <div class="fuel-input-row">
+      <input class="fuel-input" type="number" placeholder="₦ Fuel amount" id="fuel-amt">
+      <button class="fuel-btn" onclick="logFuel()">Log →</button>
+    </div>
+    <div style="padding:6px 16px 20px;font-size:10.5px;color:var(--text-tertiary);font-family:var(--mono)">Last logged: ₦8,500 · Apr 22 · 07:44 AM</div>
+  `,
+
+  scanner: () => `
+    <div class="sec-ttl">Barcode / QR Scanner</div>
+
+    <!-- Scanner view -->
+    <div class="scanner-view" onclick="doScan()">
+      <div class="scanner-grid"></div>
+      <div class="scanner-corners"></div>
+      <div class="scanner-icon"><svg viewBox="0 0 24 24"><path d="M2 4h4V2H2v2zm0 2h2V4H2v2zm0 2h2V6H2v2zm14-6h4v4h-2V4h-2V2zm2 4h2V4h-2v2zm0 2h2V6h-2v2zM2 20h4v2H2v-2zm0-2h2v2H2v-2zm16 2h4v2h-4v-2zm2-2h2v2h-2v-2zM5 7h14v10H5V7zm2 2v6h10V9H7z"/></svg></div>
+      <div class="scanner-label">TAP TO SIMULATE SCAN</div>
+    </div>
+
+    <!-- Manual entry -->
+    <div style="padding:10px 16px 0">
+      <div style="display:flex;gap:8px">
+        <input class="fuel-input" placeholder="Enter waybill manually…" id="manual-wb" style="font-size:13px">
+        <button class="fuel-btn" onclick="manualScan()">Scan</button>
+      </div>
+    </div>
+
+    <!-- Status buttons -->
+    <div style="padding:12px 16px 4px;display:flex;gap:8px;flex-wrap:wrap">
+      ${['Arrived Hub','Loaded','In Transit','Out for Delivery','Delivered','Failed'].map(s=>`
+        <button onclick="toast('Status set: ${s}')" style="padding:6px 12px;border-radius:8px;border:0.5px solid var(--border-med);background:var(--bg-raised);color:var(--text-secondary);font-size:11px;cursor:pointer;font-family:var(--mono)">${s}</button>`).join('')}
+    </div>
+
+    <!-- Recent scans -->
+    <div class="sec-ttl">Recent scans</div>
+    <div style="background:var(--bg-panel);border-radius:var(--r-xl);margin:0 16px 16px;border:0.5px solid var(--border);overflow:hidden">
+      ${[
+        ['var(--green)','SL-2026-00820','Delivered · Bola Adesanya · Asokoro','2 min ago'],
+        ['var(--teal)', 'SL-2026-00847','In Transit · Amina Bello · Maitama','18 min ago'],
+        ['var(--teal)', 'SL-2026-00843','Loaded · John Adeyemi · VI Lagos','1 hr ago'],
+        ['var(--amber)','SL-2026-00831','Failed attempt · Grace Eze · Kano','2 hr ago'],
+        ['var(--green)','SL-2026-00814','Delivered · Seun Makinde · Ibadan','3 hr ago'],
+      ].map(([c,wb,detail,time])=>`
+        <div class="scan-item">
+          <div class="scan-dot" style="background:${c};box-shadow:0 0 5px ${c}"></div>
+          <div class="scan-info">
+            <div class="scan-wb">${wb}</div>
+            <div class="scan-detail">${detail}</div>
+          </div>
+          <div class="scan-time">${time}</div>
+        </div>`).join('')}
+    </div>
+  `,
+
+  delivery: () => `
+    <div class="sec-ttl">Delivery & Handover</div>
+
+    <!-- Current delivery card -->
+    <div class="handover-card">
+      <div class="handover-ttl">Current delivery</div>
+      ${[
+        ['Waybill','SL-2026-00847'],
+        ['Recipient','Amina Bello'],
+        ['Phone','+234 802 000 0000'],
+        ['Address','14 Maitama Close, Abuja'],
+        ['Weight','2.5 kg'],
+        ['Amount','₦3,175 (Wallet)'],
+      ].map(([k,v])=>`
+        <div class="handover-row">
+          <span class="handover-key">${k}</span>
+          <span class="handover-val">${v}</span>
+        </div>`).join('')}
+    </div>
+
+    <!-- OTP section -->
+    <div class="sec-ttl" style="padding-top:14px">OTP verification</div>
+    <div style="padding:0 16px;font-size:11.5px;color:var(--text-secondary);margin-bottom:6px">Recipient has received a 4-digit OTP via SMS</div>
+    <div class="otp-row">
+      <div class="otp-box filled" onclick="toast('OTP digit')">4</div>
+      <div class="otp-box filled" onclick="toast('OTP digit')">7</div>
+      <div class="otp-box filled" onclick="toast('OTP digit')">2</div>
+      <div class="otp-box" onclick="toast('Enter last digit')">—</div>
+    </div>
+    <button class="cta-btn cta-amber" onclick="toast('OTP resent to recipient')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.5 2.5l-12 5.5 5 1.5 1.5 5z"/></svg>
+      Resend OTP
+    </button>
+
+    <!-- Signature -->
+    <div class="sec-ttl" style="padding-top:14px">Recipient signature</div>
+    <div class="sig-pad" onclick="toast('Signature pad activated')">
+      <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+      <div class="sig-pad-lbl">Tap to sign</div>
+    </div>
+
+    <!-- Photo proof -->
+    <div class="sec-ttl" style="padding-top:14px">Proof of delivery</div>
+    <div style="padding:0 16px;display:flex;gap:8px;margin-bottom:8px">
+      <div onclick="toast('Camera opened')" style="flex:1;height:80px;background:var(--bg-panel);border:0.5px dashed var(--border-med);border-radius:var(--r-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--text-tertiary)"><path d="M12 12a3 3 0 100 6 3 3 0 000-6zm-7-3h2.5l2-2h5l2 2H19a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8a2 2 0 012-2z"/></svg>
+        <span style="font-size:10px;color:var(--text-tertiary)">Take photo</span>
+      </div>
+      <div onclick="toast('Gallery opened')" style="flex:1;height:80px;background:var(--bg-panel);border:0.5px dashed var(--border-med);border-radius:var(--r-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--text-tertiary)"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg>
+        <span style="font-size:10px;color:var(--text-tertiary)">From gallery</span>
+      </div>
+    </div>
+
+    <!-- Confirm / fail buttons -->
+    <button class="cta-btn cta-solid" style="margin-top:8px" onclick="toast('Delivery confirmed! ✓')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>
+      Confirm Delivery
+    </button>
+    <button class="cta-btn cta-danger" onclick="toast('Marked as failed delivery')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      Mark as Failed
+    </button>
+    <button class="cta-btn cta-outline" style="margin-bottom:20px" onclick="toast('Rescheduled for tomorrow')">
+      Reschedule Delivery
+    </button>
+  `,
+
+  profile: () => `
+    <div style="padding:20px 0 0;text-align:center">
+      <div class="profile-avatar">EO</div>
+      <div class="profile-name">Emeka Okafor</div>
+      <div class="profile-role">captain · id #CAP-00142 · lagos hub</div>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:10px">
+        <span style="background:var(--teal-dim);border:0.5px solid var(--teal-border);color:var(--teal);font-size:10px;padding:3px 10px;border-radius:20px;font-family:var(--mono)">ONLINE</span>
+        <span style="background:var(--bg-raised);border:0.5px solid var(--border-med);color:var(--text-secondary);font-size:10px;padding:3px 10px;border-radius:20px;font-family:var(--mono)">LAS-441-KJ</span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="profile-stats">
+      <div class="stat-card"><div class="stat-val">428</div><div class="stat-lbl">Deliveries</div></div>
+      <div class="stat-card accent"><div class="stat-val">98.6%</div><div class="stat-lbl">Success</div></div>
+      <div class="stat-card"><div class="stat-val">4.9</div><div class="stat-lbl">Rating</div></div>
+    </div>
+
+    <!-- Today's summary -->
+    <div class="sec-ttl" style="padding-top:14px">Today's performance</div>
+    <div style="background:var(--bg-panel);border-radius:var(--r-xl);margin:0 16px;border:0.5px solid var(--border);padding:14px 16px">
+      ${[
+        ['Distance driven','248 km'],
+        ['Fuel logged','₦8,500'],
+        ['Packages delivered','31 / 52'],
+        ['Trip started','07:58 AM'],
+        ['ETA at hub','06:30 PM'],
+      ].map(([k,v])=>`
+        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid var(--border)">
+          <span style="font-size:12px;color:var(--text-secondary)">${k}</span>
+          <span style="font-family:var(--mono);font-size:12px;color:var(--text-primary);font-weight:500">${v}</span>
+        </div>`).join('')}
+      <div style="display:flex;justify-content:space-between;padding:7px 0">
+        <span style="font-size:12px;color:var(--text-secondary)">Fuel % remaining</span>
+        <span style="font-family:var(--mono);font-size:12px;color:var(--amber)">42%</span>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="sec-ttl" style="padding-top:14px">Settings</div>
+    <div style="background:var(--bg-panel);border-radius:var(--r-xl);margin:0 16px;border:0.5px solid var(--border);overflow:hidden">
+      ${[
+        [{bg:'var(--teal-dim)',svg:'<path d="M8 1a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm-5 9.5a5 5 0 0110 0V12H3v-1.5z" fill="currentColor"/>',c:'var(--teal)'},'My profile','Edit details','chevron'],
+        [{bg:'var(--blue-dim)',svg:'<path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 2a5 5 0 110 10A5 5 0 018 3zm0 2a3 3 0 100 6 3 3 0 000-6z" fill="currentColor"/>',c:'var(--blue)'},'GPS tracking','Always on','toggle-on'],
+        [{bg:'var(--amber-dim)',svg:'<path d="M8 1a5 5 0 00-5 5v3l-1.5 2h13L13 9V6a5 5 0 00-5-5zm0 14a2 2 0 002-2H6a2 2 0 002 2z" fill="currentColor"/>',c:'var(--amber)'},'Push notifications','Enabled','toggle-on'],
+        [{bg:'var(--green-dim)',svg:'<path d="M3 8.5h10m-3-3.5l3.5 3.5L10 12" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>',c:'var(--green)'},'Dark mode','Always on','toggle-on'],
+        [{bg:'var(--red-dim)',svg:'<path d="M6 2h4v1H6zm-2 1h8v1H4zm-1 2h10v8a1 1 0 01-1 1H5a1 1 0 01-1-1V5z" fill="currentColor"/>',c:'var(--red)'},'Sign out','','chevron'],
+      ].map(([icon,label,val,type])=>`
+        <div class="setting-row" onclick="toast('${label} tapped')">
+          <div class="setting-icon" style="background:${icon.bg}">
+            <svg viewBox="0 0 16 16" style="width:15px;height:15px;fill:${icon.c}">${icon.svg}</svg>
+          </div>
+          <div class="setting-label">${label}</div>
+          ${type==='chevron'
+            ? `<div class="setting-val">${val}</div><div class="setting-chevron">›</div>`
+            : `<div class="toggle ${type}" onclick="event.stopPropagation();this.className='toggle '+(this.className.includes('on')?'toggle-off':'toggle-on');toast('${label} toggled')"><div class="toggle-knob"></div></div>`
+          }
+        </div>`).join('')}
+    </div>
+
+    <div style="height:20px"></div>
+  `
+};
+
+/* ── Switch screens ── */
+let currentScreen = 'trip';
+
+function switchScreen(name) {
+  currentScreen = name;
+  const content = document.getElementById('screen-content');
+  content.className = 'scroll-content fade-in';
+  content.innerHTML = SCREENS[name]?.() || '';
+
+  // Bottom nav
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.screen === name);
+  });
+
+  // Page nav
+  document.querySelectorAll('.page-nav-btn').forEach(b => {
+    b.classList.toggle('active',
+      b.textContent.toLowerCase().includes(name) ||
+      (name==='trip' && b.textContent.includes('Trip')) ||
+      (name==='scanner' && b.textContent.includes('Scanner')) ||
+      (name==='delivery' && b.textContent.includes('Delivery')) ||
+      (name==='profile' && b.textContent.includes('Profile'))
+    );
+  });
+}
+
+/* ── Scanner ── */
+function doScan() {
+  const wb = 'SL-2026-00' + Math.floor(840 + Math.random()*10);
+  toast('Scanned: ' + wb + ' · Status updated');
+}
+function manualScan() {
+  const val = document.getElementById('manual-wb')?.value;
+  if(!val) { toast('Enter a waybill number'); return; }
+  toast('Scanned: ' + val);
+}
+
+/* ── Fuel ── */
+function logFuel() {
+  const val = document.getElementById('fuel-amt')?.value;
+  if(!val) { toast('Enter fuel amount'); return; }
+  toast('Fuel cost ₦' + parseInt(val).toLocaleString() + ' logged');
+}
+
+/* ── Toast ── */
+let toastT;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.style.opacity = '1'; el.style.transform = 'translateX(-50%) translateY(0)';
+  clearTimeout(toastT);
+  toastT = setTimeout(() => { el.style.opacity='0'; el.style.transform='translateX(-50%) translateY(8px)'; }, 2200);
+}
+
+/* ── Init ── */
+switchScreen('trip');
+</script>
+</body>
+</html>
