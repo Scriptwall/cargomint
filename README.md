@@ -1,6 +1,6 @@
 # 🚚 CargoMint
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](https://opensource.org/licenses/AGPL-3.0)
 [![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4.svg)](https://dotnet.microsoft.com/download/dotnet/8.0)
 [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg)](https://nextjs.org/)
 
@@ -100,7 +100,7 @@ dotnet run
 
 ## ⚖️ License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the AGPL-3.0 License. See `LICENSE` for more information.
 
 ---
 *Built with ❤️ for the future of African Logistics.*
