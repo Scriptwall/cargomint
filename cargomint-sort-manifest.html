@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CargoMint — Sorting, Bagging & Manifest Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+
+:root{
+  --black:   #080809;
+  --s1:      #0F0F12;
+  --s2:      #141418;
+  --s3:      #1A1A20;
+  --s4:      #202028;
+  --s5:      #272730;
+  --hover:   #2E2E38;
+
+  --teal:    #00D4AA;
+  --teal-d:  rgba(0,212,170,.08);
+  --teal-b:  rgba(0,212,170,.22);
+  --teal-g:  rgba(0,212,170,.14);
+  --green:   #22D46A;
+  --green-d: rgba(34,212,106,.08);
+  --red:     #FF3B55;
+  --red-d:   rgba(255,59,85,.08);
+  --amber:   #FFB020;
+  --amber-d: rgba(255,176,32,.08);
+  --blue:    #3D9EF5;
+  --blue-d:  rgba(61,158,245,.08);
+  --purple:  #9B6EF5;
+  --purple-d:rgba(155,110,245,.08);
+  --orange:  #FF7A30;
+
+  --t1: #F0F0F5;
+  --t2: #80808C;
+  --t3: #404050;
+  --t4: #28282E;
+
+  --b1: rgba(255,255,255,.055);
+  --b2: rgba(255,255,255,.09);
+  --b3: rgba(255,255,255,.15);
+
+  --font: 'Geist', sans-serif;
+  --mono: 'Geist Mono', monospace;
+  --r1: 5px; --r2: 8px; --r3: 12px; --r4: 16px; --r5: 20px;
+}
+
+body{font-family:var(--font);background:var(--black);color:var(--t1);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased}
+
+/* ── Shell ── */
+.shell{display:flex;height:100vh;overflow:hidden}
+
+/* ── Sidebar ── */
+.sidebar{width:210px;min-width:210px;background:var(--s1);border-right:0.5px solid var(--b1);display:flex;flex-direction:column;overflow:hidden}
+.logo-bar{padding:14px 14px 12px;border-bottom:0.5px solid var(--b1);display:flex;align-items:center;gap:9px;flex-shrink:0}
+.logo-icon{width:28px;height:28px;border-radius:var(--r2);background:var(--teal-d);border:0.5px solid var(--teal-b);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:14px;height:14px;fill:var(--teal)}
+.logo-name{font-size:13px;font-weight:600}
+.logo-sub{font-size:9.5px;color:var(--t3);font-family:var(--mono)}
+.nav{flex:1;padding:8px 0;overflow-y:auto}
+.nav-grp{padding:0 8px;margin-bottom:4px}
+.nav-lbl{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--t3);padding:5px 8px 3px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:var(--r2);cursor:pointer;font-size:12px;color:var(--t2);transition:background .1s,color .1s;user-select:none}
+.nav-item:hover{background:var(--hover);color:var(--t1)}
+.nav-item.active{background:var(--teal-d);color:var(--teal);border:0.5px solid var(--teal-b)}
+.nav-item svg{width:13px;height:13px;fill:currentColor;flex-shrink:0;opacity:.6}
+.nav-item.active svg{opacity:1}
+.nav-count{margin-left:auto;font-size:9.5px;font-family:var(--mono);background:var(--s4);color:var(--t2);padding:1px 6px;border-radius:10px}
+.nav-item.active .nav-count{background:var(--teal-g);color:var(--teal)}
+.nav-pip{margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 5px var(--teal)}
+.sidebar-foot{padding:10px 8px;border-top:0.5px solid var(--b1)}
+.user-row{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:var(--r2);cursor:pointer}
+.user-row:hover{background:var(--hover)}
+.ava{width:26px;height:26px;border-radius:50%;background:var(--teal-d);border:0.5px solid var(--teal-b);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;font-family:var(--mono)}
+.u-name{font-size:12px;font-weight:500}
+.u-role{font-size:9.5px;color:var(--t3)}
+
+/* ── Main ── */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+
+/* ── Topbar ── */
+.topbar{height:48px;background:var(--s1);border-bottom:0.5px solid var(--b1);display:flex;align-items:center;gap:8px;padding:0 18px;flex-shrink:0}
+.topbar-title{font-size:13px;font-weight:600;flex:1}
+.page-tabs{display:flex;gap:2px;background:var(--s3);padding:3px;border-radius:var(--r2);border:0.5px solid var(--b1)}
+.page-tab{padding:4px 14px;border-radius:6px;font-size:11.5px;cursor:pointer;color:var(--t2);font-family:var(--mono);transition:all .12s;white-space:nowrap}
+.page-tab.active{background:var(--teal-d);color:var(--teal);border:0.5px solid var(--teal-b)}
+.page-tab:hover:not(.active){color:var(--t1);background:var(--hover)}
+
+/* ── Buttons ── */
+.btn{height:28px;padding:0 12px;border-radius:var(--r2);border:0.5px solid var(--b2);background:transparent;color:var(--t2);font-size:11.5px;font-family:var(--font);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .1s;white-space:nowrap}
+.btn:hover{background:var(--hover);color:var(--t1)}
+.btn.primary{background:var(--teal-d);color:var(--teal);border-color:var(--teal-b)}
+.btn.primary:hover{background:rgba(0,212,170,.14)}
+.btn.solid{background:var(--teal);color:#080809;border-color:transparent;font-weight:600}
+.btn.solid:hover{background:#00bfa0}
+.btn.sm{height:24px;padding:0 9px;font-size:10.5px}
+.btn.danger{background:var(--red-d);color:var(--red);border-color:rgba(255,59,85,.25)}
+
+/* ── Content area ── */
+.content{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.page{display:none;flex:1;overflow:hidden;flex-direction:column}
+.page.active{display:flex;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ── Stats bar ── */
+.stats-bar{display:flex;gap:10px;padding:12px 18px;border-bottom:0.5px solid var(--b1);flex-shrink:0;background:var(--s1)}
+.stat-pill{display:flex;align-items:center;gap:7px;background:var(--s3);border:0.5px solid var(--b1);border-radius:var(--r2);padding:6px 12px}
+.stat-val{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--t1)}
+.stat-lbl{font-size:9.5px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-top:1px}
+.stat-dot{width:6px;height:6px;border-radius:50%}
+
+/* ── Toast ── */
+.toast-wrap{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:999;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none}
+.toast{background:var(--s3);border:0.5px solid var(--teal-b);color:var(--teal);font-size:11.5px;font-family:var(--mono);padding:9px 16px;border-radius:var(--r2);opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+
+/* ═══════════════════════════════════════════════
+   PAGE 1 — SORTING & BAGGING
+═══════════════════════════════════════════════ */
+.sort-layout{display:grid;grid-template-columns:320px 1fr;gap:0;flex:1;overflow:hidden}
+
+/* Unsorted pool */
+.pool-panel{background:var(--s1);border-right:0.5px solid var(--b1);display:flex;flex-direction:column;overflow:hidden}
+.panel-header{padding:12px 14px 10px;border-bottom:0.5px solid var(--b1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.panel-title{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--t2)}
+.pool-list{flex:1;overflow-y:auto;padding:10px}
+.pool-list::-webkit-scrollbar{width:3px}
+.pool-list::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+
+/* Shipment card (draggable) */
+.ship-card{background:var(--s2);border:0.5px solid var(--b1);border-radius:var(--r3);padding:10px 12px;margin-bottom:6px;cursor:grab;user-select:none;transition:border-color .15s,transform .15s,box-shadow .15s;position:relative}
+.ship-card:hover{border-color:var(--b2)}
+.ship-card.dragging{opacity:.4;transform:scale(.97);cursor:grabbing}
+.ship-card.drag-over-card{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal)}
+.ship-card-top{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.ship-wb{font-family:var(--mono);font-size:10.5px;color:var(--teal);font-weight:500}
+.ship-type{font-size:9.5px;padding:1px 7px;border-radius:4px;font-family:var(--mono);font-weight:600}
+.ship-route{font-size:12.5px;font-weight:600;color:var(--t1);margin-bottom:3px}
+.ship-meta{display:flex;gap:12px;font-size:10.5px;color:var(--t3)}
+.ship-meta span{display:flex;align-items:center;gap:3px}
+.drag-handle{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--t3);opacity:.4;cursor:grab}
+.drag-handle:hover{opacity:.8}
+
+/* Groups area */
+.groups-area{display:flex;flex-direction:column;overflow:hidden;background:var(--s2)}
+.groups-toolbar{padding:10px 14px;border-bottom:0.5px solid var(--b1);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.groups-scroll{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:12px}
+.groups-scroll::-webkit-scrollbar{width:3px}
+.groups-scroll::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+
+/* Group card */
+.group-card{background:var(--s3);border:0.5px solid var(--b1);border-radius:var(--r3);overflow:hidden;transition:border-color .15s}
+.group-card.drag-target{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal),0 0 16px rgba(0,212,170,.1)}
+.group-header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--s4);border-bottom:0.5px solid var(--b1);cursor:pointer;user-select:none}
+.group-color-bar{width:3px;height:28px;border-radius:2px;flex-shrink:0}
+.group-title{font-size:13px;font-weight:600;color:var(--t1);flex:1}
+.group-subtitle{font-size:10.5px;color:var(--t3)}
+.group-count{font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:6px;font-weight:600}
+.group-chevron{color:var(--t3);font-size:12px;transition:transform .2s}
+.group-card.collapsed .group-chevron{transform:rotate(-90deg)}
+.group-body{padding:10px;display:flex;flex-direction:column;gap:6px}
+.group-card.collapsed .group-body{display:none}
+.group-drop-zone{min-height:48px;border:1.5px dashed var(--b2);border-radius:var(--r2);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--t3);font-family:var(--mono);transition:all .15s;padding:8px}
+.group-drop-zone.drag-over{border-color:var(--teal);background:var(--teal-d);color:var(--teal)}
+.group-footer{display:flex;align-items:center;gap:8px;padding:8px 10px;border-top:0.5px solid var(--b1);background:var(--s4)}
+
+/* Bag chip */
+.bag-chip{display:flex;align-items:center;gap:6px;background:var(--s5);border:0.5px solid var(--b2);border-radius:var(--r2);padding:4px 9px;font-size:10.5px;font-family:var(--mono)}
+.bag-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* Bag management */
+.bags-row{display:flex;gap:6px;flex-wrap:wrap;padding:8px 10px;border-top:0.5px solid var(--b1)}
+.bag-tag{display:flex;align-items:center;gap:5px;background:var(--s4);border:0.5px solid var(--b2);border-radius:var(--r2);padding:5px 10px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:all .12s}
+.bag-tag:hover{border-color:var(--teal-b)}
+.bag-tag.selected{background:var(--teal-d);border-color:var(--teal-b);color:var(--teal)}
+.bag-tag-count{font-size:9.5px;color:var(--t3)}
+.bag-tag.selected .bag-tag-count{color:var(--teal)}
+
+/* ═══════════════════════════════════════════════
+   PAGE 2 — MANIFEST BUILDER
+═══════════════════════════════════════════════ */
+.manifest-layout{display:grid;grid-template-columns:1fr 380px;gap:0;flex:1;overflow:hidden}
+
+/* Left — groups pool for manifesting */
+.manifest-pool{display:flex;flex-direction:column;overflow:hidden;border-right:0.5px solid var(--b1)}
+.manifest-groups-scroll{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.manifest-groups-scroll::-webkit-scrollbar{width:3px}
+.manifest-groups-scroll::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+
+/* Manifest group row (draggable into manifest) */
+.mgroup-row{background:var(--s3);border:0.5px solid var(--b1);border-radius:var(--r3);padding:11px 14px;cursor:grab;transition:all .15s;display:flex;align-items:center;gap:12px;user-select:none}
+.mgroup-row:hover{border-color:var(--b2)}
+.mgroup-row.dragging{opacity:.4;cursor:grabbing}
+.mgroup-row.in-manifest{opacity:.4;pointer-events:none;border-style:dashed}
+.mgroup-bar{width:4px;height:36px;border-radius:2px;flex-shrink:0}
+.mgroup-info{flex:1;min-width:0}
+.mgroup-route{font-size:13px;font-weight:600;color:var(--t1)}
+.mgroup-meta{display:flex;gap:10px;font-size:10.5px;color:var(--t3);margin-top:2px}
+.mgroup-bags{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+
+/* Right — manifest slots */
+.manifest-right{display:flex;flex-direction:column;overflow:hidden;background:var(--s1)}
+.manifest-header{padding:12px 14px 10px;border-bottom:0.5px solid var(--b1);flex-shrink:0}
+.manifest-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.manifest-selector{display:flex;gap:5px;overflow-x:auto;padding-bottom:4px}
+.manifest-selector::-webkit-scrollbar{height:2px}
+.manifest-selector::-webkit-scrollbar-thumb{background:var(--b2)}
+.manifest-tab{padding:5px 12px;border-radius:var(--r2);font-size:11px;font-family:var(--mono);cursor:pointer;background:var(--s3);border:0.5px solid var(--b1);color:var(--t2);transition:all .12s;white-space:nowrap}
+.manifest-tab.active{background:var(--teal-d);color:var(--teal);border-color:var(--teal-b)}
+.manifest-tab:hover:not(.active){color:var(--t1);background:var(--hover)}
+.manifest-tab.add-btn{color:var(--t3);border-style:dashed}
+
+/* Manifest body */
+.manifest-scroll{flex:1;overflow-y:auto;padding:12px}
+.manifest-scroll::-webkit-scrollbar{width:3px}
+.manifest-scroll::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+
+.manifest-drop-zone{min-height:80px;border:1.5px dashed var(--b2);border-radius:var(--r3);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;font-size:11.5px;color:var(--t3);font-family:var(--mono);transition:all .15s;margin-bottom:10px;padding:16px}
+.manifest-drop-zone.drag-over{border-color:var(--teal);background:var(--teal-d);color:var(--teal)}
+.manifest-drop-zone svg{width:20px;height:20px;fill:currentColor;opacity:.4}
+
+/* Manifest group entry */
+.mentry{background:var(--s3);border:0.5px solid var(--b1);border-radius:var(--r3);padding:10px 12px;margin-bottom:8px;position:relative}
+.mentry-top{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.mentry-bar{width:4px;height:28px;border-radius:2px;flex-shrink:0}
+.mentry-route{font-size:12.5px;font-weight:600;flex:1}
+.mentry-remove{width:22px;height:22px;border-radius:var(--r1);border:0.5px solid var(--b1);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--t3);transition:all .1s}
+.mentry-remove:hover{background:var(--red-d);border-color:rgba(255,59,85,.3);color:var(--red)}
+.mentry-remove svg{width:10px;height:10px;fill:currentColor}
+.mentry-bags{display:flex;gap:4px;flex-wrap:wrap}
+
+/* Fleet assignment panel */
+.fleet-assign{padding:12px;border-top:0.5px solid var(--b1);background:var(--s2);flex-shrink:0}
+.fleet-assign-title{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--t3);margin-bottom:10px;font-family:var(--mono)}
+.select-field{width:100%;height:32px;padding:0 10px;border:0.5px solid var(--b2);border-radius:var(--r2);background:var(--s3);color:var(--t1);font-size:12px;font-family:var(--font);outline:none;margin-bottom:8px;appearance:none;cursor:pointer}
+.select-field:focus{border-color:var(--teal)}
+.manifest-summary{background:var(--s3);border:0.5px solid var(--teal-b);border-radius:var(--r2);padding:9px 12px;margin-bottom:10px}
+.ms-row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:0.5px solid var(--b1)}
+.ms-row:last-child{border-bottom:none;padding-top:6px;margin-top:2px}
+.ms-key{color:var(--t2)}
+.ms-val{font-family:var(--mono);font-weight:600;color:var(--t1)}
+.ms-val.accent{color:var(--teal)}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo-bar">
+      <div class="logo-icon"><svg viewBox="0 0 16 16"><path d="M1 3.5A1.5 1.5 0 012.5 2h11A1.5 1.5 0 0115 3.5v2A1.5 1.5 0 0113.5 7h-11A1.5 1.5 0 011 5.5v-2zm0 6A1.5 1.5 0 012.5 8h11A1.5 1.5 0 0115 9.5v3A1.5 1.5 0 0113.5 14h-11A1.5 1.5 0 011 12.5v-3z"/></svg></div>
+      <div><div class="logo-name">SwiftLog NG</div><div class="logo-sub">ops.cargomint.io</div></div>
+    </div>
+    <nav class="nav">
+      <div class="nav-grp">
+        <div class="nav-lbl">Operations</div>
+        <div class="nav-item"><svg viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg>Dashboard</div>
+        <div class="nav-item"><svg viewBox="0 0 16 16"><path d="M2 3a1 1 0 011-1h10a1 1 0 011 1v2H2V3zm0 4h12v5a1 1 0 01-1 1H3a1 1 0 01-1-1V7z"/></svg>Shipment Desk</div>
+        <div class="nav-item active"><svg viewBox="0 0 16 16"><path d="M2 2h5v5H2zm7 0h5v5H9zM2 9h5v5H2zm7 0h5v5H9z"/></svg>Sort & Bag<span class="nav-pip"></span></div>
+        <div class="nav-item"><svg viewBox="0 0 16 16"><path d="M1 3h14v2H1zm2 4h10v2H3zm3 4h4v2H6z"/></svg>Manifests<span class="nav-count">3</span></div>
+      </div>
+      <div class="nav-grp">
+        <div class="nav-lbl">Fleet</div>
+        <div class="nav-item"><svg viewBox="0 0 16 16"><path d="M1 6l2-3h10l2 3v5H1V6zm3.5 4a1.5 1.5 0 103 0 1.5 1.5 0 00-3 0zm5 0a1.5 1.5 0 103 0 1.5 1.5 0 00-3 0z"/></svg>Fleet & Captains</div>
+      </div>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="user-row"><div class="ava">HM</div><div><div class="u-name">Hub Manager</div><div class="u-role">Lagos VI · Admin</div></div></div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="page-title">Sort, Bag & Manifest</div>
+      <div class="page-tabs">
+        <div class="page-tab active" onclick="switchPage('sort')">1 · Sort & Bag</div>
+        <div class="page-tab" onclick="switchPage('manifest')">2 · Manifest Builder</div>
+      </div>
+      <button class="btn primary" id="topbar-action" onclick="topbarAction()">+ New group</button>
+    </div>
+
+    <!-- ═══════ PAGE 1: SORT & BAG ═══════ -->
+    <div class="page active" id="page-sort">
+      <div class="stats-bar">
+        <div class="stat-pill"><div><div class="stat-val" id="pool-count" style="color:var(--amber)">24</div><div class="stat-lbl">Unsorted</div></div></div>
+        <div class="stat-pill"><div><div class="stat-val" style="color:var(--teal)" id="group-count">4</div><div class="stat-lbl">Groups</div></div></div>
+        <div class="stat-pill"><div><div class="stat-val" style="color:var(--green)" id="sorted-count">18</div><div class="stat-lbl">Sorted</div></div></div>
+        <div class="stat-pill"><div><div class="stat-val" style="color:var(--blue)" id="bag-count">7</div><div class="stat-lbl">Bags created</div></div></div>
+        <div style="margin-left:auto;display:flex;gap:6px">
+          <button class="btn sm" onclick="autoSort()">⚡ Auto-sort by destination</button>
+          <button class="btn sm primary" onclick="switchPage('manifest')">Proceed to manifest →</button>
+        </div>
+      </div>
+
+      <div class="sort-layout">
+        <!-- Pool -->
+        <div class="pool-panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Unsorted pool</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:1px">Drag shipments into destination groups →</div>
+            </div>
+            <div style="display:flex;gap:5px">
+              <button class="btn sm" onclick="filterPool()">Filter</button>
+            </div>
+          </div>
+          <div class="pool-list" id="pool-list"></div>
+        </div>
+
+        <!-- Groups -->
+        <div class="groups-area">
+          <div class="groups-toolbar">
+            <span style="font-size:10.5px;color:var(--t2);font-family:var(--mono)">Destination groups</span>
+            <div style="margin-left:auto;display:flex;gap:6px">
+              <button class="btn sm" onclick="addGroup()">+ Add group</button>
+              <button class="btn sm danger" onclick="clearEmpty()">Clear empty</button>
+            </div>
+          </div>
+          <div class="groups-scroll" id="groups-scroll"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ PAGE 2: MANIFEST BUILDER ═══════ -->
+    <div class="page" id="page-manifest">
+      <div class="stats-bar">
+        <div class="stat-pill"><div><div class="stat-val" style="color:var(--teal)" id="m-group-count">4</div><div class="stat-lbl">Groups ready</div></div></div>
+        <div class="stat-pill"><div><div class="stat-val" style="color:var(--amber)" id="m-manifested">0</div><div class="stat-lbl">Manifested</div></div></div>
+        <div class="stat-pill"><div><div class="stat-val" style="color:var(--green)" id="m-manifest-count">2</div><div class="stat-lbl">Manifests</div></div></div>
+        <div style="margin-left:auto;display:flex;gap:6px">
+          <button class="btn sm" onclick="addManifest()">+ New manifest</button>
+          <button class="btn sm solid" onclick="dispatchAll()">Dispatch all manifests →</button>
+        </div>
+      </div>
+
+      <div class="manifest-layout">
+        <!-- Left: groups pool -->
+        <div class="manifest-pool">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Sorted groups — drag into a manifest</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:1px">Each group contains its bags. One manifest can hold multiple groups.</div>
+            </div>
+          </div>
+          <div class="manifest-groups-scroll" id="manifest-groups-scroll"></div>
+        </div>
+
+        <!-- Right: manifests -->
+        <div class="manifest-right">
+          <div class="manifest-header">
+            <div class="manifest-header-top">
+              <span style="font-size:11px;font-weight:600;color:var(--t1)">Manifests</span>
+            </div>
+            <div class="manifest-selector" id="manifest-tabs"></div>
+          </div>
+          <div class="manifest-scroll" id="manifest-scroll"></div>
+          <div class="fleet-assign">
+            <div class="fleet-assign-title">Assign fleet & dispatch</div>
+            <div class="manifest-summary" id="manifest-summary"></div>
+            <select class="select-field" id="fleet-source">
+              <option value="">Fleet type…</option>
+              <option value="own">Own fleet</option>
+              <option value="fleet-tenant">Fleet Tenant</option>
+            </select>
+            <select class="select-field" id="vehicle-select"><option value="">Select vehicle…</option></select>
+            <select class="select-field" id="captain-select"><option value="">Select captain…</option></select>
+            <button class="btn solid" style="width:100%;justify-content:center;margin-top:4px" onclick="createTrip()">
+              Create trip & notify captain →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap"><div class="toast" id="toast"></div></div>
+
+<script>
+// ═══════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════
+const GROUP_COLORS = [
+  {c:'#00D4AA',d:'rgba(0,212,170,.12)'},
+  {c:'#3D9EF5',d:'rgba(61,158,245,.12)'},
+  {c:'#FFB020',d:'rgba(255,176,32,.12)'},
+  {c:'#22D46A',d:'rgba(34,212,106,.12)'},
+  {c:'#9B6EF5',d:'rgba(155,110,245,.12)'},
+  {c:'#FF7A30',d:'rgba(255,122,48,.12)'},
+];
+
+const SHIPMENT_TYPES = {
+  'STD': {bg:'rgba(61,158,245,.12)',c:'#3D9EF5'},
+  'EXP': {bg:'rgba(0,212,170,.12)',c:'#00D4AA'},
+  'FRG': {bg:'rgba(155,110,245,.12)',c:'#9B6EF5'},
+  'BLK': {bg:'rgba(255,176,32,.12)',c:'#FFB020'},
+};
+
+// Seed shipments in pool
+let shipments = [
+  {id:'SL-00847',dest:'Abuja',route:'LOS→ABJ',wt:'2.5kg',type:'STD',name:'Amina Bello',amt:'₦3,175'},
+  {id:'SL-00848',dest:'Abuja',route:'LOS→ABJ',wt:'1.8kg',type:'EXP',name:'Chidi Nwosu',amt:'₦4,200'},
+  {id:'SL-00849',dest:'Abuja',route:'LOS→ABJ',wt:'4.0kg',type:'STD',name:'Grace Eze',amt:'₦2,600'},
+  {id:'SL-00850',dest:'Abuja',route:'LOS→ABJ',wt:'0.9kg',type:'FRG',name:'Musa Kano',amt:'₦3,800'},
+  {id:'SL-00851',dest:'Kano',route:'LOS→KAN',wt:'3.2kg',type:'STD',name:'Fatima Kabiru',amt:'₦2,900'},
+  {id:'SL-00852',dest:'Kano',route:'LOS→KAN',wt:'5.1kg',type:'BLK',name:'Ibrahim Musa',amt:'₦5,400'},
+  {id:'SL-00853',dest:'Kano',route:'LOS→KAN',wt:'1.5kg',type:'STD',name:'Hauwa Lawal',amt:'₦2,100'},
+  {id:'SL-00854',dest:'Port Harcourt',route:'LOS→PHC',wt:'2.0kg',type:'STD',name:'Ngozi Obi',amt:'₦3,500'},
+  {id:'SL-00855',dest:'Port Harcourt',route:'LOS→PHC',wt:'0.8kg',type:'EXP',name:'Emeka Okafor',amt:'₦4,600'},
+  {id:'SL-00856',dest:'Port Harcourt',route:'LOS→PHC',wt:'6.0kg',type:'BLK',name:'Adaeze Nwosu',amt:'₦6,100'},
+  {id:'SL-00857',dest:'Ibadan',route:'LOS→IBD',wt:'1.2kg',type:'STD',name:'Bola Adesanya',amt:'₦1,400'},
+  {id:'SL-00858',dest:'Ibadan',route:'LOS→IBD',wt:'2.8kg',type:'STD',name:'Seun Makinde',amt:'₦1,900'},
+  {id:'SL-00859',dest:'Kaduna',route:'LOS→KDN',wt:'3.5kg',type:'STD',name:'Aisha Bukar',amt:'₦3,200'},
+  {id:'SL-00860',dest:'Kaduna',route:'LOS→KDN',wt:'1.0kg',type:'FRG',name:'Yusuf Danbatta',amt:'₦2,800'},
+  {id:'SL-00861',dest:'Abuja',route:'LOS→ABJ',wt:'2.2kg',type:'STD',name:'Tunde Fashola',amt:'₦3,000'},
+  {id:'SL-00862',dest:'Kano',route:'LOS→KAN',wt:'4.5kg',type:'STD',name:'Bashir Musa',amt:'₦4,100'},
+  {id:'SL-00863',dest:'Port Harcourt',route:'LOS→PHC',wt:'1.6kg',type:'STD',name:'Chioma Eze',amt:'₦3,300'},
+  {id:'SL-00864',dest:'Abuja',route:'LOS→ABJ',wt:'3.0kg',type:'EXP',name:'Zainab Ahmed',amt:'₦5,000'},
+  {id:'SL-00865',dest:'Ibadan',route:'LOS→IBD',wt:'0.7kg',type:'STD',name:'Dele Alli',amt:'₦1,100'},
+  {id:'SL-00866',dest:'Kaduna',route:'LOS→KDN',wt:'2.4kg',type:'STD',name:'Safiya Garba',amt:'₦2,600'},
+  {id:'SL-00867',dest:'Kano',route:'LOS→KAN',wt:'1.9kg',type:'STD',name:'Nura Musa',amt:'₦2,300'},
+  {id:'SL-00868',dest:'Port Harcourt',route:'LOS→PHC',wt:'3.3kg',type:'STD',name:'Ify Okonkwo',amt:'₦3,700'},
+  {id:'SL-00869',dest:'Abuja',route:'LOS→ABJ',wt:'1.4kg',type:'FRG',name:'Amaka Obi',amt:'₦2,900'},
+  {id:'SL-00870',dest:'Ibadan',route:'LOS→IBD',wt:'4.2kg',type:'BLK',name:'Rotimi Savage',amt:'₦2,800'},
+];
+
+let groups = [
+  {id:'g1',label:'Lagos → Abuja',route:'LOS→ABJ',dest:'Abuja',color:0,shipments:[],bags:[],collapsed:false},
+  {id:'g2',label:'Lagos → Kano',route:'LOS→KAN',dest:'Kano',color:1,shipments:[],bags:[],collapsed:false},
+  {id:'g3',label:'Lagos → Port Harcourt',route:'LOS→PHC',dest:'Port Harcourt',color:2,shipments:[],bags:[],collapsed:false},
+  {id:'g4',label:'Lagos → Ibadan',route:'LOS→IBD',dest:'Ibadan',color:3,shipments:[],bags:[],collapsed:false},
+];
+
+let poolShipments = [...shipments.map(s=>s.id)]; // start: all in pool
+let bagCounter = 1;
+let groupCounter = 5;
+
+// Manifests
+let manifests = [
+  {id:'MAN-0091',label:'Manifest 001',groups:[],vehicle:'',captain:'',status:'open'},
+  {id:'MAN-0092',label:'Manifest 002',groups:[],vehicle:'',captain:'',status:'open'},
+];
+let activeManifest = 0;
+let manifestCounter = 3;
+
+// Dragging state
+let dragShipId = null;
+let dragGroupId = null;
+let dragMGroupId = null;
+
+// ═══════════════════════════════════════════════
+// RENDER HELPERS
+// ═══════════════════════════════════════════════
+function getShip(id){ return shipments.find(s=>s.id===id) }
+function getGroup(id){ return groups.find(g=>g.id===id) }
+function getTypeStyle(type){ return SHIPMENT_TYPES[type]||{bg:'rgba(255,255,255,.06)',c:'#80808C'} }
+
+function shipCardHTML(s, inGroup=false){
+  const ts = getTypeStyle(s.type);
+  return `
+    <div class="ship-card" draggable="true" data-id="${s.id}"
+         ondragstart="onShipDragStart(event,'${s.id}')"
+         ondragend="onDragEnd(event)">
+      <div class="ship-card-top">
+        <span class="ship-wb">${s.id}</span>
+        <span class="ship-type" style="background:${ts.bg};color:${ts.c}">${s.type}</span>
+        <span style="font-size:10px;color:var(--t3);margin-left:auto">${s.wt}</span>
+      </div>
+      <div class="ship-route">${s.name}</div>
+      <div class="ship-meta">
+        <span>${s.route}</span>
+        <span>${s.amt}</span>
+      </div>
+      ${inGroup?`<div class="drag-handle">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4h2v2H3zm0 4h2v2H3zm0 4h2v2H3zm4-8h2v2H7zm0 4h2v2H7zm0 4h2v2H7zm4-8h2v2h-2zm0 4h2v2h-2zm0 4h2v2h-2z"/></svg>
+      </div>`:''}
+    </div>`;
+}
+
+function bagHTML(bag, color){
+  return `<div class="bag-tag" data-bag="${bag.id}" onclick="selectBag('${bag.id}')">
+    <div class="bag-dot" style="background:${color}"></div>
+    <span style="font-weight:600">${bag.label}</span>
+    <span class="bag-tag-count">${bag.shipments.length} pkgs</span>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER POOL
+// ═══════════════════════════════════════════════
+function renderPool(){
+  const el = document.getElementById('pool-list');
+  const poolShips = shipments.filter(s=>poolShipments.includes(s.id));
+  if(!poolShips.length){
+    el.innerHTML = `<div style="text-align:center;padding:40px 20px;color:var(--t3);font-family:var(--mono);font-size:11px">
+      <div style="font-size:24px;margin-bottom:8px">✓</div>All shipments sorted
+    </div>`;
+    return;
+  }
+  el.innerHTML = poolShips.map(s=>shipCardHTML(s,false)).join('');
+  // drop zone for returning to pool
+  el.ondragover = e=>{e.preventDefault();el.style.background='rgba(0,212,170,.04)'};
+  el.ondragleave = e=>{el.style.background=''};
+  el.ondrop = e=>{
+    e.preventDefault(); el.style.background='';
+    if(dragShipId) returnToPool(dragShipId);
+  };
+  updateCounts();
+}
+
+// ═══════════════════════════════════════════════
+// RENDER GROUPS
+// ═══════════════════════════════════════════════
+function renderGroups(){
+  const el = document.getElementById('groups-scroll');
+  if(!groups.length){
+    el.innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--t3);font-family:var(--mono);font-size:11px">No groups yet — click "+ Add group" to start</div>`;
+    return;
+  }
+  el.innerHTML = groups.map(g=>{
+    const col = GROUP_COLORS[g.color % GROUP_COLORS.length];
+    const groupShips = shipments.filter(s=>g.shipments.includes(s.id));
+    const totalWeight = groupShips.reduce((a,s)=>a+parseFloat(s.wt),0).toFixed(1);
+    return `
+    <div class="group-card ${g.collapsed?'collapsed':''}" id="gc-${g.id}"
+         ondragover="onGroupDragOver(event,'${g.id}')"
+         ondragleave="onGroupDragLeave(event,'${g.id}')"
+         ondrop="onGroupDrop(event,'${g.id}')">
+      <div class="group-header" onclick="toggleGroup('${g.id}')">
+        <div class="group-color-bar" style="background:${col.c}"></div>
+        <div style="flex:1">
+          <div class="group-title">${g.label}</div>
+          <div class="group-subtitle">${groupShips.length} shipments · ${totalWeight}kg total</div>
+        </div>
+        <span class="group-count" style="background:${col.d};color:${col.c}">${groupShips.length}</span>
+        <button class="btn sm danger" style="margin-left:4px" onclick="event.stopPropagation();deleteGroup('${g.id}')">✕</button>
+        <span class="group-chevron" style="margin-left:6px">▾</span>
+      </div>
+      <div class="group-body">
+        <div class="group-drop-zone" id="gdz-${g.id}" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="onGroupDrop(event,'${g.id}');this.classList.remove('drag-over')">
+          ${groupShips.length?'Drop more shipments here':'Drop shipments here'}
+        </div>
+        ${groupShips.map(s=>{
+          const ts=getTypeStyle(s.type);
+          return `<div class="ship-card" draggable="true" data-id="${s.id}"
+            ondragstart="onShipDragStart(event,'${s.id}')"
+            ondragend="onDragEnd(event)">
+            <div class="ship-card-top">
+              <span class="ship-wb">${s.id}</span>
+              <span class="ship-type" style="background:${ts.bg};color:${ts.c}">${s.type}</span>
+              <span style="font-size:10px;color:var(--t3);margin-left:auto">${s.wt}</span>
+            </div>
+            <div class="ship-route">${s.name}</div>
+            <div class="ship-meta"><span>${s.route}</span><span>${s.amt}</span></div>
+            <div class="drag-handle"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4h2v2H3zm0 4h2v2H3zm0 4h2v2H3zm4-8h2v2H7zm0 4h2v2H7zm0 4h2v2H7zm4-8h2v2h-2zm0 4h2v2h-2zm0 4h2v2h-2z"/></svg></div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="group-footer" style="display:${g.collapsed?'none':'flex'}">
+        <div style="display:flex;gap:5px;flex:1;flex-wrap:wrap">
+          ${g.bags.map(b=>bagHTML(b,col.c)).join('')}
+        </div>
+        <button class="btn sm primary" onclick="createBag('${g.id}')">+ New bag</button>
+      </div>
+    </div>`;
+  }).join('');
+  updateCounts();
+}
+
+// ═══════════════════════════════════════════════
+// RENDER MANIFEST PAGE
+// ═══════════════════════════════════════════════
+function renderManifestGroups(){
+  const el = document.getElementById('manifest-groups-scroll');
+  const sortedGroups = groups.filter(g=>g.shipments.length>0);
+  if(!sortedGroups.length){
+    el.innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--t3);font-family:var(--mono);font-size:11px">No sorted groups yet. Complete sorting first.</div>`;
+    return;
+  }
+  el.innerHTML = sortedGroups.map(g=>{
+    const col = GROUP_COLORS[g.color % GROUP_COLORS.length];
+    const inManifest = manifests.some(m=>m.groups.includes(g.id));
+    const totalWeight = shipments.filter(s=>g.shipments.includes(s.id)).reduce((a,s)=>a+parseFloat(s.wt),0).toFixed(1);
+    return `
+    <div class="mgroup-row ${inManifest?'in-manifest':''}" draggable="${!inManifest}"
+         data-gid="${g.id}"
+         ondragstart="onMGroupDragStart(event,'${g.id}')"
+         ondragend="onDragEnd(event)">
+      <div class="mgroup-bar" style="background:${col.c}"></div>
+      <div class="mgroup-info">
+        <div class="mgroup-route">${g.label}</div>
+        <div class="mgroup-meta">
+          <span>${g.shipments.length} shipments</span>
+          <span>${totalWeight}kg</span>
+          ${inManifest?`<span style="color:var(--teal)">✓ In manifest</span>`:''}
+        </div>
+        <div class="mgroup-bags">
+          ${g.bags.map(b=>`<div class="bag-chip"><div class="bag-dot" style="background:${col.c}"></div>${b.label} · ${b.shipments.length}p</div>`).join('')}
+        </div>
+      </div>
+      ${inManifest?'<span style="font-size:18px;color:var(--teal)">✓</span>':'<span style="color:var(--t3);font-size:18px" title="Drag to manifest">⠿</span>'}
+    </div>`;
+  }).join('');
+}
+
+function renderManifestTabs(){
+  const el = document.getElementById('manifest-tabs');
+  el.innerHTML = manifests.map((m,i)=>`
+    <div class="manifest-tab ${i===activeManifest?'active':''}" onclick="setActiveManifest(${i})">${m.label}</div>
+  `).join('') + `<div class="manifest-tab add-btn" onclick="addManifest()">+ New</div>`;
+}
+
+function renderManifestContent(){
+  const m = manifests[activeManifest];
+  if(!m) return;
+  const el = document.getElementById('manifest-scroll');
+  const mGroups = m.groups.map(gid=>groups.find(g=>g.id===gid)).filter(Boolean);
+
+  el.innerHTML = `
+    <div class="manifest-drop-zone ${m.groups.length?'':''}}"
+         id="manifest-drop-main"
+         ondragover="event.preventDefault();this.classList.add('drag-over')"
+         ondragleave="this.classList.remove('drag-over')"
+         ondrop="onManifestDrop(event);this.classList.remove('drag-over')">
+      <svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      Drop groups here
+    </div>
+    ${mGroups.map(g=>{
+      const col = GROUP_COLORS[g.color % GROUP_COLORS.length];
+      const totalWeight = shipments.filter(s=>g.shipments.includes(s.id)).reduce((a,s)=>a+parseFloat(s.wt),0).toFixed(1);
+      return `
+      <div class="mentry">
+        <div class="mentry-top">
+          <div class="mentry-bar" style="background:${col.c}"></div>
+          <div style="flex:1">
+            <div class="mentry-route">${g.label}</div>
+            <div style="font-size:10.5px;color:var(--t3)">${g.shipments.length} shipments · ${totalWeight}kg</div>
+          </div>
+          <button class="mentry-remove" onclick="removeFromManifest('${g.id}')">
+            <svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          </button>
+        </div>
+        <div class="mentry-bags">
+          ${g.bags.map(b=>`<div class="bag-chip"><div class="bag-dot" style="background:${col.c}"></div>${b.label} · ${b.shipments.length}p</div>`).join('')}
+          ${!g.bags.length?`<span style="font-size:10.5px;color:var(--t3);font-family:var(--mono)">No bags — return to sorting to create bags</span>`:''}
+        </div>
+      </div>`;
+    }).join('')}`;
+
+  // Summary
+  const totalShipments = mGroups.reduce((a,g)=>a+g.shipments.length,0);
+  const totalWeight = mGroups.reduce((a,g)=>a+shipments.filter(s=>g.shipments.includes(s.id)).reduce((b,s)=>b+parseFloat(s.wt),0),0).toFixed(1);
+  const totalBags = mGroups.reduce((a,g)=>a+g.bags.length,0);
+  document.getElementById('manifest-summary').innerHTML = `
+    <div class="ms-row"><span class="ms-key">Manifest ID</span><span class="ms-val accent">${m.id}</span></div>
+    <div class="ms-row"><span class="ms-key">Groups</span><span class="ms-val">${mGroups.length}</span></div>
+    <div class="ms-row"><span class="ms-key">Shipments</span><span class="ms-val">${totalShipments}</span></div>
+    <div class="ms-row"><span class="ms-key">Total weight</span><span class="ms-val">${totalWeight}kg</span></div>
+    <div class="ms-row"><span class="ms-key">Bags</span><span class="ms-val">${totalBags}</span></div>`;
+
+  renderManifestGroups();
+  updateManifestCounts();
+}
+
+// ═══════════════════════════════════════════════
+// DRAG & DROP — SORT PAGE
+// ═══════════════════════════════════════════════
+function onShipDragStart(e, id){
+  dragShipId = id;
+  e.dataTransfer.effectAllowed = 'move';
+  setTimeout(()=>document.querySelector(`[data-id="${id}"]`)?.classList.add('dragging'),0);
+}
+
+function onGroupDragOver(e, gid){
+  e.preventDefault();
+  document.getElementById('gc-'+gid)?.classList.add('drag-target');
+}
+function onGroupDragLeave(e, gid){
+  document.getElementById('gc-'+gid)?.classList.remove('drag-target');
+}
+function onGroupDrop(e, gid){
+  e.preventDefault();
+  document.getElementById('gc-'+gid)?.classList.remove('drag-target');
+  if(!dragShipId) return;
+  moveShipToGroup(dragShipId, gid);
+  dragShipId = null;
+}
+function onDragEnd(e){
+  dragShipId = null;
+  dragGroupId = null;
+  dragMGroupId = null;
+  document.querySelectorAll('.dragging').forEach(el=>el.classList.remove('dragging'));
+  document.querySelectorAll('.drag-target').forEach(el=>el.classList.remove('drag-target'));
+  document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'));
+}
+
+function moveShipToGroup(shipId, groupId){
+  // Remove from pool
+  poolShipments = poolShipments.filter(id=>id!==shipId);
+  // Remove from any existing group
+  groups.forEach(g=>{ g.shipments = g.shipments.filter(id=>id!==shipId) });
+  // Add to target group
+  const g = getGroup(groupId);
+  if(g){ g.shipments.push(shipId); toast(`Moved ${shipId} → ${g.label}`) }
+  renderPool(); renderGroups();
+}
+
+function returnToPool(shipId){
+  groups.forEach(g=>{ g.shipments = g.shipments.filter(id=>id!==shipId) });
+  if(!poolShipments.includes(shipId)) poolShipments.push(shipId);
+  toast(`${shipId} returned to pool`);
+  renderPool(); renderGroups();
+}
+
+// ═══════════════════════════════════════════════
+// DRAG & DROP — MANIFEST PAGE
+// ═══════════════════════════════════════════════
+function onMGroupDragStart(e, gid){
+  dragMGroupId = gid;
+  e.dataTransfer.effectAllowed = 'move';
+  setTimeout(()=>document.querySelector(`[data-gid="${gid}"]`)?.classList.add('dragging'),0);
+}
+
+function onManifestDrop(e){
+  e.preventDefault();
+  if(!dragMGroupId) return;
+  const m = manifests[activeManifest];
+  if(!m) return;
+  if(!m.groups.includes(dragMGroupId)){
+    m.groups.push(dragMGroupId);
+    const g = getGroup(dragMGroupId);
+    toast(`${g?.label} added to ${m.label}`);
+  }
+  dragMGroupId = null;
+  renderManifestContent();
+  renderManifestTabs();
+}
+
+function removeFromManifest(gid){
+  const m = manifests[activeManifest];
+  if(!m) return;
+  m.groups = m.groups.filter(id=>id!==gid);
+  const g = getGroup(gid);
+  toast(`${g?.label} removed from manifest`);
+  renderManifestContent();
+}
+
+// ═══════════════════════════════════════════════
+// ACTIONS
+// ═══════════════════════════════════════════════
+function toggleGroup(gid){
+  const g = getGroup(gid);
+  if(g) g.collapsed = !g.collapsed;
+  renderGroups();
+}
+
+function deleteGroup(gid){
+  const g = getGroup(gid);
+  if(!g) return;
+  // Return all shipments to pool
+  g.shipments.forEach(sid=>{ if(!poolShipments.includes(sid)) poolShipments.push(sid) });
+  groups = groups.filter(gr=>gr.id!==gid);
+  toast(`Group deleted — shipments returned to pool`);
+  renderPool(); renderGroups();
+}
+
+function addGroup(){
+  const dest = prompt('Destination name (e.g. "Enugu"):');
+  if(!dest) return;
+  const newG = {
+    id: 'g'+groupCounter++,
+    label: `Lagos → ${dest}`,
+    route: `LOS→${dest.toUpperCase().slice(0,3)}`,
+    dest, color: groups.length,
+    shipments: [], bags: [], collapsed: false
+  };
+  groups.push(newG);
+  toast(`Group "${newG.label}" created`);
+  renderGroups();
+}
+
+function clearEmpty(){
+  const before = groups.length;
+  groups = groups.filter(g=>g.shipments.length>0);
+  toast(`Removed ${before-groups.length} empty groups`);
+  renderGroups();
+}
+
+function createBag(gid){
+  const g = getGroup(gid);
+  if(!g) return;
+  const bagId = 'BAG-'+String(bagCounter++).padStart(4,'0');
+  // Auto-assign unbagged shipments from this group
+  const baggedShips = g.bags.flatMap(b=>b.shipments);
+  const unbagged = g.shipments.filter(s=>!baggedShips.includes(s));
+  if(!unbagged.length){ toast('All shipments already bagged'); return; }
+  const bag = { id: bagId, label: bagId, shipments: unbagged };
+  g.bags.push(bag);
+  toast(`${bagId} created — ${unbagged.length} shipments bagged`);
+  renderGroups();
+  updateBagCount();
+}
+
+function selectBag(bagId){ toast(`${bagId} selected — scan or print label`) }
+function filterPool(){ toast('Filter panel coming') }
+
+function autoSort(){
+  shipments.forEach(s=>{
+    if(!poolShipments.includes(s.id)) return;
+    let target = groups.find(g=>g.dest===s.dest);
+    if(!target){
+      target = {
+        id:'g'+groupCounter++,
+        label:`Lagos → ${s.dest}`,
+        route:s.route, dest:s.dest,
+        color:groups.length, shipments:[], bags:[], collapsed:false
+      };
+      groups.push(target);
+    }
+    target.shipments.push(s.id);
+    poolShipments = poolShipments.filter(id=>id!==s.id);
+  });
+  toast('Auto-sorted all shipments by destination');
+  renderPool(); renderGroups();
+}
+
+function addManifest(){
+  const newM = {
+    id: 'MAN-00'+(90+manifestCounter++),
+    label: `Manifest 00${manifestCounter-1}`,
+    groups:[], vehicle:'', captain:'', status:'open'
+  };
+  manifests.push(newM);
+  activeManifest = manifests.length-1;
+  toast(`${newM.label} created`);
+  renderManifestTabs();
+  renderManifestContent();
+}
+
+function setActiveManifest(idx){
+  activeManifest = idx;
+  renderManifestTabs();
+  renderManifestContent();
+}
+
+function dispatchAll(){
+  const ready = manifests.filter(m=>m.groups.length>0);
+  if(!ready.length){ toast('No manifests with groups — add groups first'); return; }
+  toast(`${ready.length} manifest(s) queued for dispatch. Assign fleet to proceed.`);
+}
+
+function createTrip(){
+  const m = manifests[activeManifest];
+  if(!m?.groups.length){ toast('Add groups to this manifest first'); return; }
+  const vehicle = document.getElementById('vehicle-select').value;
+  const captain = document.getElementById('captain-select').value;
+  if(!vehicle){ toast('Select a vehicle'); return; }
+  if(!captain){ toast('Select a captain'); return; }
+  toast(`Trip created for ${m.label} — Captain notified via Captain App ✓`);
+}
+
+// Fleet selects
+document.getElementById('fleet-source').addEventListener('change', function(){
+  const v = document.getElementById('vehicle-select');
+  const c = document.getElementById('captain-select');
+  if(this.value==='own'){
+    v.innerHTML = '<option value="">Select vehicle…</option><option value="LAS-441-KJ">LAS-441-KJ · Sprinter Van</option><option value="LAS-882-XZ">LAS-882-XZ · Box Truck</option><option value="LAS-557-BD">LAS-557-BD · Sprinter Van</option>';
+    c.innerHTML = '<option value="">Select captain…</option><option value="emeka">Emeka Okafor</option><option value="tunde">Tunde Fashola</option><option value="yemi">Yemi Alade</option>';
+  } else if(this.value==='fleet-tenant'){
+    v.innerHTML = '<option value="">Select fleet tenant…</option><option value="fw1">FastWheels NG · Sprinter</option><option value="sw1">SpeedMove · Box Truck</option>';
+    c.innerHTML = '<option value="">Driver assigned by fleet tenant</option>';
+  } else {
+    v.innerHTML = '<option value="">Select vehicle…</option>';
+    c.innerHTML = '<option value="">Select captain…</option>';
+  }
+});
+
+// ═══════════════════════════════════════════════
+// COUNTS
+// ═══════════════════════════════════════════════
+function updateCounts(){
+  document.getElementById('pool-count').textContent = poolShipments.length;
+  document.getElementById('group-count').textContent = groups.length;
+  document.getElementById('sorted-count').textContent = shipments.length - poolShipments.length;
+  updateBagCount();
+}
+function updateBagCount(){
+  const total = groups.reduce((a,g)=>a+g.bags.length,0);
+  document.getElementById('bag-count').textContent = total;
+}
+function updateManifestCounts(){
+  const sortedGroups = groups.filter(g=>g.shipments.length>0);
+  const manifestedGroups = manifests.flatMap(m=>m.groups);
+  document.getElementById('m-group-count').textContent = sortedGroups.length;
+  document.getElementById('m-manifested').textContent = manifestedGroups.length;
+  document.getElementById('m-manifest-count').textContent = manifests.length;
+}
+
+// ═══════════════════════════════════════════════
+// PAGE SWITCHING
+// ═══════════════════════════════════════════════
+function switchPage(page){
+  document.getElementById('page-sort').classList.toggle('active', page==='sort');
+  document.getElementById('page-manifest').classList.toggle('active', page==='manifest');
+  document.querySelectorAll('.page-tab').forEach((t,i)=>t.classList.toggle('active', (i===0&&page==='sort')||(i===1&&page==='manifest')));
+  document.getElementById('topbar-title').textContent = page==='sort'?'Sort & Bag Shipments':'Manifest Builder';
+  document.getElementById('topbar-action').textContent = page==='sort'?'+ New group':'+ New manifest';
+  if(page==='manifest'){
+    renderManifestGroups();
+    renderManifestTabs();
+    renderManifestContent();
+  }
+}
+
+function topbarAction(){
+  const active = document.getElementById('page-sort').classList.contains('active');
+  if(active) addGroup(); else addManifest();
+}
+
+// Nav items
+document.querySelectorAll('.nav-item').forEach(el=>{
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    el.classList.add('active');
+    if(el.textContent.includes('Sort')) switchPage('sort');
+    else if(el.textContent.includes('Manifest')) switchPage('manifest');
+    else toast('Navigating…');
+  });
+});
+
+// ═══════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════
+let toastT;
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>el.classList.remove('show'),2400);
+}
+
+// ═══════════════════════════════════════════════
+// INIT — pre-sort some shipments so it's not empty
+// ═══════════════════════════════════════════════
+(function init(){
+  // Pre-sort a handful into groups to show the UI usefully
+  const preSorted = {
+    g1:['SL-00847','SL-00848','SL-00849','SL-00850','SL-00861','SL-00864','SL-00869'],
+    g2:['SL-00851','SL-00852','SL-00853','SL-00862','SL-00867'],
+    g3:['SL-00854','SL-00855','SL-00856','SL-00863','SL-00868'],
+    g4:['SL-00857','SL-00858','SL-00865','SL-00870'],
+  };
+  Object.entries(preSorted).forEach(([gid, ids])=>{
+    const g = getGroup(gid);
+    if(!g) return;
+    ids.forEach(sid=>{
+      poolShipments = poolShipments.filter(id=>id!==sid);
+      g.shipments.push(sid);
+    });
+  });
+  // Pre-create bags for group 1
+  const g1 = getGroup('g1');
+  if(g1){
+    g1.bags = [
+      {id:'BAG-0001',label:'BAG-0001',shipments:['SL-00847','SL-00848','SL-00849']},
+      {id:'BAG-0002',label:'BAG-0002',shipments:['SL-00850','SL-00861','SL-00864','SL-00869']},
+    ];
+    bagCounter = 3;
+  }
+  const g2 = getGroup('g2');
+  if(g2){
+    g2.bags = [{id:'BAG-0003',label:'BAG-0003',shipments:['SL-00851','SL-00852','SL-00853','SL-00862','SL-00867']}];
+    bagCounter = 4;
+  }
+  renderPool();
+  renderGroups();
+})();
+</script>
+</body>
+</html>
