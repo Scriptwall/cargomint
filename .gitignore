@@ -299,7 +299,7 @@ test-visuals/
 *.pdf
 *.docx
 # *.xlsx and *.csv are allowed if they are templates/samples
-* (1).html
+/*.html
 backend*.log
 tmp-api*.log
 run-api*.log
